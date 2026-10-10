@@ -8,7 +8,7 @@
 require dirname(__DIR__) . '/includes/bootstrap.php';
 fbbf_handle_options();
 if (!fbbf_is_installed()) {
-    fbbf_json_response(['ok' => false, 'message' => 'server_not_configured', 'message_ar' => 'السيرفر غير مهيأ بعد.'], 503);
+    fbbf_json_response(['ok' => false, 'error_code' => 'server_not_configured', 'message' => 'server_not_configured', 'message_ar' => 'السيرفر غير مهيأ بعد.'], 503);
 }
 fbbf_enforce_rate_limit('check', 120, 60);
 
@@ -20,37 +20,37 @@ $deviceLabel = trim((string)($data['device_label'] ?? 'Browser'));
 $extVersion = trim((string)($data['extension_version'] ?? ''));
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $token === '') {
-    fbbf_json_response(['ok' => false, 'message' => 'missing_credentials', 'message_ar' => 'بيانات الدخول ناقصة.'], 422);
+    fbbf_json_response(['ok' => false, 'error_code' => 'missing_credentials', 'message' => 'missing_credentials', 'message_ar' => 'بيانات الدخول ناقصة.'], 422);
 }
 
 // قراءة تحت حماية: فشل التخزين ≠ حساب غير موجود
 $users = fbbf_users();
 if (function_exists('fbbf_users_read_failed') && fbbf_users_read_failed()) {
-    fbbf_json_response(['ok' => false, 'message' => 'storage_unavailable', 'message_ar' => 'السيرفر مشغول لحظيًا. أعد المحاولة بعد ثوانٍ.', 'soft' => true], 503);
+    fbbf_json_response(['ok' => false, 'error_code' => 'storage_unavailable', 'message' => 'storage_unavailable', 'message_ar' => 'السيرفر مشغول لحظيًا. أعد المحاولة بعد ثوانٍ.', 'soft' => true], 503);
 }
 $idx = fbbf_find_user_index($users, $email);
 if ($idx === -1) {
     usleep(80000);
     $users = fbbf_users();
     if (function_exists('fbbf_users_read_failed') && fbbf_users_read_failed()) {
-        fbbf_json_response(['ok' => false, 'message' => 'storage_unavailable', 'message_ar' => 'السيرفر مشغول لحظيًا. أعد المحاولة بعد ثوانٍ.', 'soft' => true], 503);
+        fbbf_json_response(['ok' => false, 'error_code' => 'storage_unavailable', 'message' => 'storage_unavailable', 'message_ar' => 'السيرفر مشغول لحظيًا. أعد المحاولة بعد ثوانٍ.', 'soft' => true], 503);
     }
     $idx = fbbf_find_user_index($users, $email);
 }
 if ($idx === -1) {
     // قائمة فارغة مع ملف كان فيه بيانات → اعتبرها مشغولية لا حذف حساب
     if (is_file(FBBF_USERS_FILE) && @filesize(FBBF_USERS_FILE) > 10 && count($users) === 0) {
-        fbbf_json_response(['ok' => false, 'message' => 'storage_unavailable', 'message_ar' => 'السيرفر مشغول لحظيًا. أعد المحاولة بعد ثوانٍ.', 'soft' => true], 503);
+        fbbf_json_response(['ok' => false, 'error_code' => 'storage_unavailable', 'message' => 'storage_unavailable', 'message_ar' => 'السيرفر مشغول لحظيًا. أعد المحاولة بعد ثوانٍ.', 'soft' => true], 503);
     }
-    fbbf_json_response(['ok' => false, 'message' => 'user_not_found', 'message_ar' => 'الحساب غير موجود.'], 404);
+    fbbf_json_response(['ok' => false, 'error_code' => 'user_not_found', 'message' => 'user_not_found', 'message_ar' => 'الحساب غير موجود.'], 404);
 }
 $user = $users[$idx];
 
 if ($token === '' || !hash_equals((string)($user['access_token'] ?? ''), $token)) {
-    fbbf_json_response(['ok' => false, 'message' => 'invalid_token', 'message_ar' => 'انتهت جلسة الدخول. سجّل دخولك مرة واحدة من الإضافة.'], 401);
+    fbbf_json_response(['ok' => false, 'error_code' => 'invalid_token', 'message' => 'invalid_token', 'message_ar' => 'انتهت جلسة الدخول. سجّل دخولك مرة واحدة من الإضافة.'], 401);
 }
 if (!empty($user['blocked'])) {
-    fbbf_json_response(['ok' => false, 'message' => 'blocked', 'message_ar' => 'تم إيقاف هذا الحساب.'], 403);
+    fbbf_json_response(['ok' => false, 'error_code' => 'blocked', 'message' => 'blocked', 'message_ar' => 'تم إيقاف هذا الحساب.'], 403);
 }
 
 // تحديث last_seen تحت قفل عبر save_users (reconcile)

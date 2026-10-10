@@ -163,8 +163,10 @@ async function lp_fetchJson(path, bodyObj) {
   var data = {};
   try { data = await resp.json(); } catch (_) {}
   if (!resp.ok || !data.ok) {
+    var code = data && (data.error_code || data.code || data.message);
     var err = new Error((data && (data.message_ar || data.message)) || ('http_' + resp.status));
-    err.code = (data && (data.message_ar || data.message)) || ('http_' + resp.status);
+    err.code = code || ('http_' + resp.status);
+    err.status = resp.status;
     throw err;
   }
   return data;
@@ -313,7 +315,9 @@ async function lp_verifyRemoteAccess() {
     return data;
   } catch (err) {
     var code = String((err && (err.code || err.message)) || '');
-    var soft = /user_not_found|storage_unavailable|too_many_requests|http_503|http_429|network_error|timeout/i.test(code);
+    var status = Number(err && err.status || 0);
+    var soft = /user_not_found|storage_unavailable|too_many_requests|http_503|http_429|network_error|timeout/i.test(code)
+      || status === 408 || status === 425 || status === 429 || status >= 500;
     if (soft && (s.accessGranted || s.loggedIn)) {
       // لا تمسح الجلسة — ردّ اصطناعي يبقي الوصول المحلي
       var streak = 0;
@@ -382,7 +386,26 @@ async function lp_initGate() {
       } catch (err) {
         var code = String((err && (err.code || err.message)) || '');
         // invalid_token / blocked فقط يمنعان العمل — وبدون مسح التوكن حتى يسجّل المستخدم يدويًا
-        if (/invalid_token|blocked|unauthorized/i.test(code)) {
+        if (/blocked/i.test(code)) {
+          lp_showLanding();
+          lp_prefillEmail(s.email || '');
+          lp_setStatus(lp_translateError(code, false), 'error');
+          return;
+        }
+        if (/invalid_token|unauthorized/i.test(code)) {
+          var cacheAge = Date.now() - Number(s.lastVerifiedAt || 0);
+          var cachedEntitlementEndsAt = Math.max(Number(s.subscriptionEndsAt || 0), lp_deriveTrialEndsAt(s));
+          var hasFreshActiveCache = s.accessGranted === true
+            && s.lastVerifiedAt > 0
+            && cacheAge >= 0
+            && cacheAge <= 6 * 60 * 60 * 1000
+            && cachedEntitlementEndsAt > Date.now();
+          if (hasFreshActiveCache) {
+            lp_showApp(false);
+            lp_showTrialBar();
+            lp_setStatus('⚠️ تعذرت مزامنة جلسة الخادم مؤقتًا؛ بقيت جلستك واشتراكك محفوظين.', 'loading');
+            return;
+          }
           lp_showLanding();
           lp_prefillEmail(s.email || '');
           lp_setStatus(lp_translateError(code, false), 'error');

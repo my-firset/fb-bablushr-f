@@ -795,6 +795,11 @@ function fbbf_merge_user_record(array $disk, array $incoming): array {
     } else {
         $base['subscription_expires_at'] = max((int)($disk['subscription_expires_at'] ?? 0), (int)($incoming['subscription_expires_at'] ?? 0));
         $base['trial_ends_at'] = max((int)($disk['trial_ends_at'] ?? 0), (int)($incoming['trial_ends_at'] ?? 0));
+        // updated_at has second precision. On a tie, disk is the last committed
+        // token; do not let a stale concurrent snapshot overwrite it.
+        if ((string)($disk['access_token'] ?? '') !== '') {
+            $base['access_token'] = $disk['access_token'];
+        }
     }
     if ((string)($base['password_hash'] ?? '') === '' && (string)($disk['password_hash'] ?? '') !== '') {
         $base['password_hash'] = $disk['password_hash'];
