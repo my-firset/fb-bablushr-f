@@ -1404,7 +1404,7 @@ if (function_exists('fbbf_active_announcements')):
       <div>
         <a href="login-download.php" id="mainDlBtn" class="btn-download-big">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          تحميل الإضافة الآن — v16.5.21
+          تحميل الإضافة الآن — v16.5.22
         </a>
       </div>
       <p class="dl-fileinfo">ملف مضغوط ZIP · <a onclick="document.getElementById('install').scrollIntoView({behavior:'smooth'});return false;">شرح التثبيت بالتفصيل ↓</a></p>
@@ -1528,7 +1528,7 @@ if (function_exists('fbbf_active_announcements')):
       <!-- Chrome Panel -->
       <div class="install-panel active" id="panel-chrome">
         <div class="install-steps-list">
-          <div class="install-step"><div class="install-step-num">١</div><div class="install-step-body"><div class="install-step-title">تحميل الملف</div><div class="install-step-desc">اضغط زر "تحميل الإضافة" في الأعلى. سيُحفظ ملف <code>fb-bablushr-f-v16.5.21-extension.zip</code> في مجلد التنزيلات.</div></div></div>
+          <div class="install-step"><div class="install-step-num">١</div><div class="install-step-body"><div class="install-step-title">تحميل الملف</div><div class="install-step-desc">اضغط زر "تحميل الإضافة" في الأعلى. سيُحفظ ملف <code>fb-bablushr-f-v16.5.22-extension.zip</code> في مجلد التنزيلات.</div></div></div>
           <div class="install-step"><div class="install-step-num">٢</div><div class="install-step-body"><div class="install-step-title">فك ضغط الملف</div><div class="install-step-desc">انقر بالزر الأيمن على الملف واختر "استخراج هنا" أو "Extract Here". ستحصل على مجلد بداخله ملفات الإضافة.</div></div></div>
           <div class="install-step"><div class="install-step-num">٣</div><div class="install-step-body"><div class="install-step-title">فتح إدارة الإضافات</div><div class="install-step-desc">في شريط العنوان اكتب <code>chrome://extensions</code> واضغط Enter. أو من القائمة: المزيد من الأدوات → الإضافات.</div></div></div>
           <div class="install-step"><div class="install-step-num">٤</div><div class="install-step-body"><div class="install-step-title">تفعيل وضع المطور</div><div class="install-step-desc">في الزاوية العليا اليمنى فعِّل مفتاح "وضع المطوّر" أو Developer mode. سيظهر شريط أدوات جديد.</div></div></div>
@@ -1542,7 +1542,7 @@ if (function_exists('fbbf_active_announcements')):
       <div class="install-panel" id="panel-kiwi">
         <div class="install-steps-list">
           <div class="install-step"><div class="install-step-num">١</div><div class="install-step-body"><div class="install-step-title">حمِّل Kiwi Browser</div><div class="install-step-desc">من Google Play Store حمِّل تطبيق <code>Kiwi Browser</code> — متصفح مجاني يدعم إضافات Chrome على أندرويد.</div></div></div>
-          <div class="install-step"><div class="install-step-num">٢</div><div class="install-step-body"><div class="install-step-title">تحميل ملف الإضافة</div><div class="install-step-desc">افتح هذه الصفحة في Kiwi Browser وحمِّل ملف <code>fb-bablushr-f-v16.5.21-extension.zip</code>. سيُحفظ في مجلد Downloads.</div></div></div>
+          <div class="install-step"><div class="install-step-num">٢</div><div class="install-step-body"><div class="install-step-title">تحميل ملف الإضافة</div><div class="install-step-desc">افتح هذه الصفحة في Kiwi Browser وحمِّل ملف <code>fb-bablushr-f-v16.5.22-extension.zip</code>. سيُحفظ في مجلد Downloads.</div></div></div>
           <div class="install-step"><div class="install-step-num">٣</div><div class="install-step-body"><div class="install-step-title">فتح إدارة الإضافات</div><div class="install-step-desc">في Kiwi اكتب في شريط العنوان: <code>kiwi://extensions</code> واضغط انتقال.</div></div></div>
           <div class="install-step"><div class="install-step-num">٤</div><div class="install-step-body"><div class="install-step-title">تفعيل Developer Mode</div><div class="install-step-desc">في الزاوية العلوية اليمنى فعِّل مفتاح Developer mode. اضغط <code>+ (from .zip/.crx/.user.js)</code>.</div></div></div>
           <div class="install-step"><div class="install-step-num">٥</div><div class="install-step-body"><div class="install-step-title">اختيار الملف</div><div class="install-step-desc">سيفتح مدير الملفات — انتقل لـ Downloads واختر الملف المضغوط. Kiwi سيثبّته تلقائياً.</div></div></div>
@@ -1555,7 +1555,7 @@ if (function_exists('fbbf_active_announcements')):
       <div class="install-panel" id="panel-quetta">
         <div class="install-steps-list">
           <div class="install-step"><div class="install-step-num">١</div><div class="install-step-body"><div class="install-step-title">حمِّل Quetta Browser</div><div class="install-step-desc">من Google Play Store حمِّل تطبيق <code>Quetta</code> (أو QuetaX) — متصفح أندرويد بديل مبني على Chromium وبيدعم إضافات كروم زي Kiwi Browser.</div></div></div>
-          <div class="install-step"><div class="install-step-num">٢</div><div class="install-step-body"><div class="install-step-title">تحميل ملف الإضافة</div><div class="install-step-desc">افتح هذه الصفحة داخل Quetta وحمِّل ملف <code>fb-bablushr-f-v16.5.21-extension.zip</code>. سيُحفظ في مجلد Downloads بجهازك.</div></div></div>
+          <div class="install-step"><div class="install-step-num">٢</div><div class="install-step-body"><div class="install-step-title">تحميل ملف الإضافة</div><div class="install-step-desc">افتح هذه الصفحة داخل Quetta وحمِّل ملف <code>fb-bablushr-f-v16.5.22-extension.zip</code>. سيُحفظ في مجلد Downloads بجهازك.</div></div></div>
           <div class="install-step"><div class="install-step-num">٣</div><div class="install-step-body"><div class="install-step-title">فتح إدارة الإضافات</div><div class="install-step-desc">اضغط على قائمة المتصفح (⋮) وابحث عن "Extensions" أو "الإضافات". لو مش لاقيها في القائمة، جرّب تكتب <code>quetta://extensions</code> في شريط العنوان.</div></div></div>
           <div class="install-step"><div class="install-step-num">٤</div><div class="install-step-body"><div class="install-step-title">تفعيل وضع المطوّر</div><div class="install-step-desc">في صفحة الإضافات، فعِّل مفتاح "Developer mode" أو "وضع المطوّر" (عادةً في الزاوية العلوية). سيظهر خيار إضافة ملف مضغوط.</div></div></div>
           <div class="install-step"><div class="install-step-num">٥</div><div class="install-step-body"><div class="install-step-title">تثبيت الملف</div><div class="install-step-desc">اضغط على خيار إضافة إضافة من ملف (زي "Load from .zip" أو ما يشابهه) واختر الملف اللي حملته من Downloads.</div></div></div>

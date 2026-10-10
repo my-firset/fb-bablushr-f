@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fb Bablushr F — لوحة التحكم</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="dashboard-auth.js"></script>
+
+  <script src="theme-sync.js"></script>
+</head>
+<body>
+<div class="d-app">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TOP HEADER: Logo + Brand + Status + Emergency Controls
+       ═══════════════════════════════════════════════════════════════ -->
+  <header class="d-header">
+    <div class="d-brand">
+      <div class="bablushr-logo-container" style="background:transparent!important;display:flex;align-items:center;justify-content:center;gap:10px;">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px;flex-shrink:0;overflow:visible;filter:drop-shadow(0 0 10px rgba(45,212,191,0.45));">
+            <defs>
+              <linearGradient id="hexGrad_dash" x1="10" y1="5" x2="90" y2="95" gradientUnits="userSpaceOnUse">
+                <stop offset="0%"   stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+              <linearGradient id="fGrad_dash" x1="38" y1="28" x2="60" y2="72" gradientUnits="userSpaceOnUse">
+                <stop offset="0%"   stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#ccfbf1"/>
+              </linearGradient>
+            </defs>
+            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25"
+              stroke="url(#hexGrad_dash)" stroke-width="4"
+              style="fill:rgba(10,4,21,0.90)!important;"/>
+            <path d="M65 35C70 42 70 58 65 65"
+              stroke="#3b82f6" stroke-width="3" stroke-linecap="round"
+              style="fill:none!important;"/>
+            <path d="M72 27C80 38 80 62 72 73"
+              stroke="#22d3ee" stroke-width="2" stroke-linecap="round"
+              style="fill:none!important;"/>
+            <path d="M38 72V28H60M38 48H52"
+              stroke="url(#fGrad_dash)" stroke-width="8"
+              stroke-linecap="round" stroke-linejoin="round"
+              style="fill:none!important;"/>
+          </svg>
+        <div style="background:transparent!important;display:flex;flex-direction:column;text-align:right;gap:2px;">
+            <span style="color:#ffffff!important;background:transparent!important;font-size:15px;font-weight:800;font-family:'Cairo',sans-serif;line-height:1.2;">fb Bablushr F</span>
+            <span style="color:#3b82f6!important;background:transparent!important;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;">● ACTIVE STEALTH ENGINE</span>
+          </div>
+      </div>
+        <div class="d-header-controls">
+      <div class="d-status-strip">
+        <span id="sessionIndicator" class="pill">غير متصل</span>
+        <span id="queueIndicator" class="pill soft">جاهز</span>
+      </div>
+      <button id="openFacebookBtn" class="ghost-btn">فتح Facebook</button>
+      <button id="openPopupBtn" class="ghost-btn">الإضافة</button>
+      <button id="stopNowBtn" class="danger-btn">⛔ إيقاف فوري</button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HORIZONTAL MAIN NAV: 4 Top-Level Tabs
+       ═══════════════════════════════════════════════════════════════ -->
+  <nav class="d-nav" role="tablist">
+    <div class="d-nav-inner">
+      <button id="btn-tab-home" class="d-tab active" data-dash="home" role="tab" type="button">
+        <span class="d-tab-icon">🏠</span> الرئيسية
+      </button>
+      <button id="btn-tab-tool1" class="d-tab" data-dash="discover" role="tab" type="button">
+        <span class="d-tab-icon">🔎</span> اكتشاف الجروبات
+      </button>
+      <button id="btn-tab-tool2" class="d-tab" data-dash="campaigns" role="tab" type="button">
+        <span class="d-tab-icon">🚀</span> الحملات والنشر
+      </button>
+      <button id="btn-tab-schedule" class="d-tab" data-dash="schedule" role="tab" type="button">
+        <span class="d-tab-icon">📅</span> الجدولة
+      </button>
+      <button id="btn-tab-analytics" class="d-tab" data-dash="analytics" role="tab" type="button">
+        <span class="d-tab-icon">📊</span> التحليلات
+      </button>
+      <button id="btn-tab-abtest" class="d-tab" data-dash="abtest" role="tab" type="button">
+        <span class="d-tab-icon">🎲</span> A/B Testing
+      </button>
+      <button id="btn-tab-profiles" class="d-tab" data-dash="profiles" role="tab" type="button">
+        <span class="d-tab-icon">👤</span> البروفايلات
+      </button>
+      <button id="btn-tab-referral" class="d-tab" data-dash="referral" role="tab" type="button">
+        <span class="d-tab-icon">🎁</span> الإحالة
+      </button>
+      <button id="btn-tab-bestgroups" class="d-tab" data-dash="bestgroups" role="tab" type="button">
+        <span class="d-tab-icon">🏆</span> أفضل جروباتك
+      </button>
+      <button id="btn-tab-webhook" class="d-tab" data-dash="webhook" role="tab" type="button">
+        <span class="d-tab-icon">📲</span> الإشعارات
+      </button>
+      <button id="btn-tab-pricing-page" class="d-tab d-tab-plans" data-dash="pricing" role="tab" type="button">
+        <span class="d-tab-icon">💎</span> الخطط والاشتراك
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════════════ -->
+  <main class="d-main">
+
+    <!-- ─────────────────────────────────────────────────────────────
+         PANEL 1 — الرئيسية (Dashboard / Home)
+         ───────────────────────────────────────────────────────────── -->
+    <div class="d-panel active" id="tab-home">
+
+      <!-- ══ ② مسارات العمل — Workflow Steps ════════════════════════ -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="eyebrow" style="margin-bottom:12px;">② مسارات العمل المقترحة</div>
+        <div class="workflow-steps">
+          <div class="flow-step active">① اكتشف الجروبات المناسبة وفلترها</div>
+          <div class="flow-step">② جهّز المحتوى والقالب المناسب</div>
+          <div class="flow-step">③ شغّل الحملة ثم راقب التقدم في التتبع</div>
+        </div>
+      </div>
+
+      <!-- ══ ③ تشغيل سريع — Quick Actions ═══════════════════════════ -->
+      <div class="home-quick-box" style="margin-bottom:16px;">
+        <h4>③ تشغيل سريع</h4>
+        <button id="openFacebookBtn2" class="ghost-btn home-quick-btn" data-action="open-facebook">🌐 فتح Facebook</button>
+        <button id="openPopupBtn2"    class="ghost-btn home-quick-btn" data-action="open-popup">🔧 فتح واجهة الإضافة</button>
+        <button id="stopNowBtn2"      class="danger-btn home-quick-btn" data-action="stop-now">⛔ إيقاف فوري</button>
+      </div>
+
+      <!-- ══ ④ لوحة التشغيل الذكية — Control Panel ═════════════════ -->
+      <div class="topbar card-glass" style="margin-bottom:16px;">
+        <div>
+          <div class="eyebrow">④ مركز التحكم</div>
+          <h2>لوحة التشغيل الذكية</h2>
+          <p>كل قسم مربوط بمسار عملي واضح: اكتشاف الجروب → تجهيز المحتوى → تشغيل الحملة → متابعة الأداء.</p>
+        </div>
+        <div class="topbar-side">
+          <div class="status-strip">
+            <span class="pill">جاهزية الجلسة</span>
+            <span class="pill soft">حالة الطابور</span>
+          </div>
+          <div class="mini-note">المحرك يعمل في الخلفية ويستكمل الدورة بثبات أثناء التنقل بين التبويبات.</div>
+        </div>
+      </div>
+
+      <!-- ══ ⑤⑥⑦ Status Metric Cards ════════════════════════════════
+           جاهزية الجلسة · حالة الطابور · سرعة العمل
+           IDs: overviewSession / overviewQueue / overviewSpeed — DO NOT RENAME -->
+      <section class="overview-grid">
+        <div class="overview-card">
+          <span>⑤ جاهزية الجلسة</span>
+          <strong id="overviewSession">Facebook</strong>
+          <small>تحقق من فتح فيسبوك والاتصال قبل تشغيل أي حملة.</small>
+        </div>
+        <div class="overview-card">
+          <span>⑥ حالة الطابور</span>
+          <strong id="overviewQueue">جاهز</strong>
+          <small>يتم تحديثه مباشرة من محرك النشر داخل الإضافة.</small>
+        </div>
+        <div class="overview-card">
+          <span>⑦ سرعة العمل</span>
+          <strong id="overviewSpeed">0s → 0s</strong>
+          <small>اضبط التأخير بما يناسب أمان الحساب ونمط العمل.</small>
+        </div>
+        <div class="overview-card accent">
+          <span>وضع التشغيل</span>
+          <strong>Stealth Engine</strong>
+          <small>مصمم ليستكمل الدورة بثبات مع الحفاظ على تجربة المستخدم.</small>
+        </div>
+      </section>
+
+    </div>
+    <!-- /tab-home -->
+
+    <!-- ─────────────────────────────────────────────────────────────
+         PANEL 2 — اكتشاف الجروبات
+         IMPORTANT: keeps all original IDs + class="tab-panel"
+         ───────────────────────────────────────────────────────────── -->
+    <div class="d-panel" id="tab-tool1">
+
+      <!-- Hidden compat button so dashboard.js can find data-tab="discover" -->
+      <div aria-hidden="true" style="display:none">
+        <button class="nav-btn" type="button" data-tab="discover"></button>
+      </div>
+
+      <section id="tab-discover" class="tab-panel active">
+        <div class="section-hero">
+          <div>
+            <div class="eyebrow">Discover</div>
+            <h3>اكتشاف وفرز الجروبات المستهدفة</h3>
+            <p>هذا القسم مسؤول عن بناء قاعدة الجروبات التي ستُغذّي الحملات لاحقًا، مع فلترة دقيقة وحفظ مركزي داخل المكتبة.</p>
+          </div>
+          <div class="hero-chip">بحث • فلترة • حفظ</div>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <div class="card-headline">
+              <div>
+                <h3>بحث ذكي عن الجروبات</h3>
+                <p>حدد المجال والموقع والكلمات الإلزامية أو المستبعدة قبل تشغيل البحث.</p>
+              </div>
+              <span class="chip subtle">Patch 8</span>
+            </div>
+            <div class="grid two compact">
+              <label><span>الكلمة المفتاحية</span><input id="discoverKeyword" type="text" placeholder="مثال: كلمة البحث" /></label>
+              <label><span>المحافظة</span><input id="discoverProvince" type="text" placeholder="مثال: المحافظة" /></label>
+              <label><span>أقل عدد أعضاء</span><input id="discoverMinMembers" type="number" value="0" min="0" /></label>
+              <label><span>النوع</span>
+                <select id="discoverType">
+                  <option value="all">الكل</option>
+                  <option value="public">عام</option>
+                  <option value="private">خاص</option>
+                  <option value="buy-sell">بيع وشراء</option>
+                </select>
+              </label>
+              <label><span>التصنيف</span><input id="discoverCategory" type="text" placeholder="مثال: التصنيف" /></label>
+              <label><span>كلمات مطلوبة داخل النتائج</span><input id="discoverMustInclude" type="text" placeholder="مثال: كلمة1, كلمة2" /></label>
+              <label><span>كلمات مستبعدة</span><input id="discoverExcludeTerms" type="text" placeholder="مثال: مستبعد1, مستبعد2" /></label>
+              <label class="checkbox-line emphasis-line"><input id="discoverAutoJoin" type="checkbox" /> <span>انضمام تلقائي أثناء البحث</span></label>
+            </div>
+            <div class="actions-row">
+              <button id="runDiscoverBtn" class="primary-btn">ابدأ البحث</button>
+              <button id="saveSearchResultsBtn" class="ghost-btn">حفظ النتائج بالمكتبة</button>
+              <button id="exportDiscoverJsonBtn" class="ghost-btn">تصدير JSON</button>
+              <button id="exportDiscoverCsvBtn" class="ghost-btn">تصدير CSV</button>
+            </div>
+            <div id="discoverSummary" class="note">ابدأ ببحث جديد وسيظهر عدد النتائج الممسوحة والمطابقة هنا.</div>
+            <div id="discoverLiveStatus" class="note live">حالة البحث اللحظية ستظهر هنا.</div>
+            <div id="discoverJoinSummary" class="note">سيظهر هنا عدد محاولات الانضمام والطلبات المقبولة/المرسلة طبقًا للفلاتر فقط.</div>
+            <div id="discoverExcludedSummary" class="note warn">سيظهر هنا عدد النتائج المستبعدة وأسباب الاستبعاد.</div>
+          </div>
+
+          <div class="card">
+            <div class="card-headline">
+              <div>
+                <h3>مكتبة الجروبات المحلية</h3>
+                <p>كل ما تحفظه هنا يصبح جاهزًا للاختيار في قسم الحملات بدون إعادة بحث.</p>
+              </div>
+              <span class="chip subtle">Library</span>
+            </div>
+            <div class="grid two compact">
+              <label><span>فلترة بالتصنيف</span><select id="libraryCategoryFilter"></select></label>
+              <label><span>بحث بالاسم</span><input id="librarySearch" type="text" placeholder="اسم الجروب" /></label>
+            </div>
+            <div class="actions-row">
+              <button id="selectAllLibraryBtn" class="ghost-btn">تحديد الكل</button>
+              <button id="clearLibrarySelectionBtn" class="ghost-btn">إلغاء التحديد</button>
+            </div>
+            <div id="libraryList" class="list-box"></div>
+          </div>
+        </div>
+
+        <div class="grid two discover-grid">
+          <div class="card">
+            <div class="card-headline compact-head">
+              <h3>نتائج آخر بحث</h3>
+              <span class="chip">Matched</span>
+            </div>
+            <div id="discoverResults" class="list-box tall"></div>
+          </div>
+          <div class="card">
+            <div class="card-headline compact-head">
+              <h3>نتائج مستبعدة وأسبابها</h3>
+              <span class="chip subtle">Filtered Out</span>
+            </div>
+            <div id="discoverExcludedResults" class="list-box tall"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- /tab-tool1 -->
+
+    <!-- ─────────────────────────────────────────────────────────────
+         PANEL 3 — الحملات والنشر
+         Contains sub-nav + campaign / templates / competitors / tracking
+         ───────────────────────────────────────────────────────────── -->
+    <div class="d-panel" id="tab-tool2">
+
+      <!-- Sub-navigation (horizontal) — uses existing data-tab so dashboard.js works -->
+      <nav class="d-subnav" aria-label="أقسام الحملات">
+        <button class="nav-btn active" type="button" data-tab="campaign">
+          <span class="nav-icon">🚀</span> الحملات والنشر
+        </button>
+        <button class="nav-btn" type="button" data-tab="templates">
+          <span class="nav-icon">🧩</span> القوالب والوسائط
+        </button>
+        <button class="nav-btn" type="button" data-tab="competitors">
+          <span class="nav-icon">💬</span> تحليل المنافسين
+        </button>
+        <button class="nav-btn" type="button" data-tab="tracking">
+          <span class="nav-icon">📈</span> التتبع المباشر
+        </button>
+      </nav>
+
+      <!-- ── CAMPAIGN SUB-PANEL ──────────────────────────────────── -->
+      <section id="tab-campaign" class="tab-panel active">
+        <div class="section-hero">
+          <div>
+            <div class="eyebrow">Campaigns</div>
+            <h3>تحويل المكتبة إلى حملة نشر فعلية</h3>
+            <p>هنا تتجمع الجروبات المحددة مع النص النهائي والوسائط لتبدأ دورة النشر بشكل منظم.</p>
+          </div>
+          <div class="hero-chip">Queue • Delay • Repeat</div>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <div class="card-headline">
+              <div>
+                <h3>إعداد الحملة</h3>
+                <p>اضبط اسم الحملة والوضع والتأخيرات والتكرار قبل البدء.</p>
+              </div>
+              <span class="chip subtle">Planner</span>
+            </div>
+            <div class="grid two compact">
+              <label><span>اسم الحملة</span><input id="campaignName" type="text" placeholder="اسم الحملة" /></label>
+              <label><span>وضع النشر</span>
+                <select id="campaignPostMode">
+                  <option value="account">الحساب الشخصي</option>
+                  <option value="anonymous">مجهول إذا الجروب يدعم</option>
+                </select>
+              </label>
+              <label><span>أقل تأخير بين الجروبات (ثانية)</span><input id="campaignMinDelay" type="number" value="15" min="1" /></label>
+              <label><span>أقصى تأخير بين الجروبات (ثانية)</span><input id="campaignMaxDelay" type="number" value="45" min="1" /></label>
+            </div>
+
+            <div class="sub-block">
+              <h4>إعادة الدورة تلقائيًا</h4>
+              <label class="checkbox-line"><input id="repeatCycleEnabled" type="checkbox" /> <span>بعد نهاية كل دورة أعد التشغيل تلقائيًا</span></label>
+              <div class="grid two compact" style="margin-top:10px">
+                <label><span>القيمة</span><input id="repeatCycleValue" type="number" value="30" min="1" /></label>
+                <label><span>الوحدة</span>
+                  <select id="repeatCycleUnit">
+                    <option value="minutes">دقيقة</option>
+                    <option value="hours">ساعة</option>
+                    <option value="days">يوم</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="sub-block">
+              <h4>اختيار الجروبات</h4>
+              <div id="selectedGroupsCounter" class="note">لم يتم اختيار أي جروب</div>
+            </div>
+
+            <div class="actions-row">
+              <button id="startCampaignBtn" class="primary-btn">▶ ابدأ النشر</button>
+              <button id="stopCampaignBtn" class="danger-btn">⛔ إيقاف الحملة</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-headline">
+              <div>
+                <h3>محتوى المنشور</h3>
+                <p>اختر قالبًا أو اكتب النص النهائي ثم أضف التعليق الأول والوسائط.</p>
+              </div>
+              <span class="chip subtle">Content</span>
+            </div>
+            <label><span>اختر قالب محفوظ</span><select id="templatePicker"></select></label>
+            <label style="margin-top:10px"><span>نص المنشور النهائي</span><textarea id="campaignContent" rows="10" placeholder="اكتب المحتوى أو حمّل قالبًا"></textarea></label>
+            <label class="checkbox-line" style="margin-top:12px;display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--b2);border-radius:12px;background:var(--s3);cursor:pointer;">
+              <input type="checkbox" id="enableFirstComment" />
+              <span style="font-weight:800;font-size:13px;">تفعيل التعليق الأول بعد كل منشور</span>
+            </label>
+            <p style="font-size:11px;color:var(--t3);margin:6px 0 0;line-height:1.5">⚠️ مغلق افتراضيًا — لن يُرسل أي تعليق إلا بعد تفعيل هذا الخيار وكتابة نص التعليق.</p>
+            <label style="margin-top:10px" id="campaignCommentWrap"><span>نص التعليق الأول</span><textarea id="campaignComment" rows="3" placeholder="يُستخدم فقط عند تفعيل الخيار أعلاه" disabled></textarea></label>
+            <div class="media-preview-wrap">
+              <label style="margin-top:10px"><span>وسائط الحملة</span><input id="campaignMedia" type="file" accept="image/*,video/*" multiple /></label>
+              <div id="mediaPreview" class="chips"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TEMPLATES SUB-PANEL ────────────────────────────────── -->
+      <section id="tab-templates" class="tab-panel">
+        <div class="section-hero">
+          <div>
+            <div class="eyebrow">Templates</div>
+            <h3>قوالب جاهزة قابلة لإعادة الاستخدام</h3>
+            <p>أنشئ قالب إعلان أو محتوى مرة واحدة ثم اسحبه لأي حملة لاحقًا.</p>
+          </div>
+          <div class="hero-chip">Reusable Assets</div>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <div class="card-headline">
+              <div>
+                <h3>بناء قالب جديد</h3>
+                <p>اكتب فكرتك بجملة واحدة ودع الذكاء الاصطناعي يبني القالب كاملاً، أو اختر مجالاً جاهزاً، أو املأ يدويًا.</p>
+              </div>
+              <span class="chip subtle">Builder</span>
+            </div>
+
+            <div class="note" style="background:linear-gradient(135deg,rgba(45,212,191,0.10),rgba(19,78,74,0.05));border-color:rgba(45,212,191,0.24);margin-top:0;margin-bottom:12px;">
+              <label><span>🤖 صف فكرة منشورك بجملة واحدة</span>
+                <textarea id="tplAiIdea" rows="2" placeholder="مثال: شقة 3 غرف للإيجار في مدينة نصر قريبة من المترو"></textarea>
+              </label>
+              <div class="actions-row">
+                <button id="aiGenerateTplBtn" class="primary-btn full-width" type="button">✨ توليد القالب بالذكاء الاصطناعي</button>
+              </div>
+              <p style="margin-top:8px;font-size:11px;">يستخدم نفس مفتاح Groq المحفوظ من تبويب الإضافة. بدون مفتاح؟ سيعمل توليد محلي ذكي تلقائيًا بدون أي تكلفة.</p>
+            </div>
+
+            <label><span>🚀 أو ابدأ من قالب جاهز لمجالك</span>
+              <select id="tplPresetPicker">
+                <option value="">— اختر مجال النشاط —</option>
+                <option value="realestate">🏠 عقارات</option>
+                <option value="ecommerce">🛍️ منتجات / تجارة إلكترونية</option>
+                <option value="services">🛠️ خدمات (صيانة / تصميم / استشارات)</option>
+                <option value="jobs">💼 توظيف وفرص عمل</option>
+                <option value="restaurant">🍔 مطاعم وكافيهات</option>
+                <option value="education">🎓 تعليم ودورات تدريبية</option>
+                <option value="beauty">💄 تجميل وعناية شخصية</option>
+                <option value="automotive">🚗 سيارات وقطع غيار</option>
+              </select>
+            </label>
+            <div class="grid two compact" style="margin-top:10px">
+              <label><span>اسم القالب</span><input id="tplName" type="text" placeholder="اسم القالب" /></label>
+              <label><span>التصنيف</span><input id="tplCategory" type="text" placeholder="تصنيف القالب" /></label>
+              <label><span>العنوان</span><input id="tplTitle" type="text" placeholder="عنوان المنشور" /></label>
+              <label><span>السعر</span><input id="tplPrice" type="text" placeholder="السعر" /></label>
+              <label><span>الحالة</span><input id="tplCondition" type="text" placeholder="الحالة" /></label>
+              <label><span>الموقع</span><input id="tplLocation" type="text" placeholder="الموقع" /></label>
+            </div>
+            <label style="margin-top:10px"><span>الوصف</span><textarea id="tplBody" rows="6" placeholder="تفاصيل المحتوى"></textarea></label>
+            <div class="grid two compact" style="margin-top:10px">
+              <label><span>✨ المميزات (افصل بفاصلة)</span><input id="tplFeatures" type="text" placeholder="مثال: ضمان سنة, توصيل سريع" /></label>
+              <label><span>📞 رقم التواصل</span><input id="tplPhone" type="text" placeholder="01xxxxxxxxx" /></label>
+            </div>
+            <div class="grid two compact" style="margin-top:10px">
+              <label><span>👉 دعوة لاتخاذ إجراء (CTA)</span><input id="tplCTA" type="text" placeholder="مثال: اطلب الآن" /></label>
+              <label><span># هاشتاجات (افصل بفاصلة)</span><input id="tplHashtags" type="text" placeholder="مثال: عروض, تسوق" /></label>
+            </div>
+            <div class="actions-row">
+              <button id="buildTemplateBtn" class="ghost-btn">🧩 تجهيز النص</button>
+              <button id="saveTemplateBtn" class="primary-btn">💾 حفظ القالب</button>
+            </div>
+            <label style="margin-top:10px"><span>المحتوى الجاهز</span><textarea id="tplResult" rows="8" placeholder="سيظهر النص النهائي هنا"></textarea></label>
+          </div>
+
+          <div class="card">
+            <div class="card-headline compact-head">
+              <h3>القوالب المحفوظة</h3>
+              <span class="chip subtle">Saved</span>
+            </div>
+            <div id="templatesList" class="list-box tall"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── COMPETITORS SUB-PANEL ──────────────────────────────── -->
+      <section id="tab-competitors" class="tab-panel">
+        <div class="section-hero">
+          <div>
+            <div class="eyebrow">Competitors</div>
+            <h3>تحليل المنشورات وإدارة الردود والرسائل</h3>
+            <p>اسحب التفاعلات من أي منشور، طبّق الفلاتر، ثم نفّذ ردودًا أو رسائل جماعية مع سجل وتقارير.</p>
+          </div>
+          <div class="hero-chip">Extract • Filter • Reply</div>
+        </div>
+
+        <div class="card">
+          <div class="card-headline">
+            <div>
+              <h3>تحليل منشور مستهدف</h3>
+              <p>كل الأدوات الخاصة بالتعليقات والرسائل مجمعة هنا.</p>
+            </div>
+            <span class="chip subtle">Operations Suite</span>
+          </div>
+          <div class="grid two compact">
+            <label><span>رابط المنشور</span><input id="competitorPostUrl" type="url" placeholder="https://www.facebook.com/..." /></label>
+            <label><span>قالب رد محفوظ</span><input id="replyTemplateInput" type="text" placeholder="نص قالب الرد" /></label>
+            <label><span>نوع القالب</span>
+              <select id="replyTemplateType">
+                <option value="عام">عام</option>
+                <option value="عميل ساخن">عميل ساخن</option>
+                <option value="عميل بارد">عميل بارد</option>
+                <option value="متابعة">متابعة</option>
+              </select>
+            </label>
+            <label><span>بحث داخل التعليقات</span><input id="commentSearchInput" type="text" placeholder="فلترة بالاسم أو النص" /></label>
+            <label><span>استبعاد أسماء</span><input id="excludeNamesInput" type="text" placeholder="مثال: اسم1, اسم2" /></label>
+            <label><span>استبعاد كلمات</span><input id="excludeKeywordsInput" type="text" placeholder="مثال: كلمة1, كلمة2" /></label>
+          </div>
+          <div class="grid two compact" style="margin-top:12px">
+            <label><span>أقل طول للتعليق</span><input id="minCommentLengthInput" type="number" min="0" max="500" step="1" value="0" /></label>
+            <label><span>ترتيب العرض</span>
+              <select id="commentSortSelect">
+                <option value="favorite">المفضلة أولاً</option>
+                <option value="replies">الأكثر ردوداً</option>
+                <option value="name">الاسم</option>
+                <option value="blocked-last">غير المحظور أولاً</option>
+              </select>
+            </label>
+          </div>
+          <div class="inline-checks" style="margin-top:10px">
+            <label class="check-chip"><input id="onlyProfileComments" type="checkbox" /> <span>بروفايل فقط</span></label>
+            <label class="check-chip"><input id="onlyReplyThreads" type="checkbox" /> <span>بها ردود فقط</span></label>
+            <label class="check-chip"><input id="skipSpamComments" type="checkbox" checked /> <span>إخفاء السبام والروابط</span></label>
+            <label class="check-chip"><input id="uniqueProfilesOnly" type="checkbox" checked /> <span>بروفايل واحد لكل شخص</span></label>
+          </div>
+          <div class="grid two compact" style="margin-top:12px">
+            <label><span>تأخير بين كل رد/رسالة (ثانية)</span><input id="bulkDelayInput" type="number" min="0.5" max="30" step="0.5" value="2" /></label>
+            <label><span>أقصى عدد عمليات جماعية</span><input id="bulkMaxInput" type="number" min="1" max="500" step="1" value="50" /></label>
+          </div>
+          <div class="quick-fill" id="quickFillBar"></div>
+          <div class="actions-row">
+            <button id="extractCommentsBtn" class="primary-btn">سحب التعليقات والردود</button>
+            <button id="saveReplyTemplateBtn" class="ghost-btn">حفظ قالب الرد</button>
+            <button id="exportCommentsBtn" class="ghost-btn">تصدير JSON</button>
+            <button id="exportCommentsCsvBtn" class="ghost-btn">تصدير CSV</button>
+            <button id="bulkReplyBtn" class="ghost-btn">رد جماعي</button>
+            <button id="bulkMessageBtn" class="ghost-btn">رسائل خاصة جماعية</button>
+          </div>
+          <div id="competitorSummary" class="note">سيتم عرض الأسماء والنصوص والروابط هنا بعد السحب.</div>
+          <div class="grid two compact" style="margin-top:12px">
+            <label><span>نص الرسالة الخاصة</span><textarea id="privateMessageInput" rows="4" placeholder="نص الرسالة الخاصة..."></textarea></label>
+            <div>
+              <span class="subtle-title">القوالب المحفوظة</span>
+              <div id="replyTemplatesList" class="chips"></div>
+            </div>
+          </div>
+          <div class="mini-grid" style="margin-top:12px">
+            <div>
+              <div class="sub-block-header">
+                <h4>المفضلة</h4>
+                <button id="pasteToFavBtn" class="small-btn soft">📋 لصق أسماء للمفضلة</button>
+              </div>
+              <div id="favoritesList" class="list-box compact-list"></div>
+            </div>
+            <div>
+              <div class="sub-block-header">
+                <h4>عدم الرد</h4>
+                <button id="pasteToDNRBtn" class="small-btn warn-btn">📋 لصق أسماء لعدم الرد</button>
+              </div>
+              <div id="doNotReplyList" class="list-box compact-list"></div>
+            </div>
+          </div>
+          <div id="commentsList" class="list-box tall"></div>
+          <div style="margin-top:14px">
+            <h4 style="margin-bottom:10px">تقدم العملية الجارية</h4>
+            <div class="progress-wrap" id="bulkProgressWrap" style="display:none">
+              <div class="progress-bar" id="bulkProgressBar"></div>
+              <div class="progress-label" id="bulkProgressLabel">0%</div>
+            </div>
+            <div class="session-stats">
+              <div class="sstat"><strong id="sessReplies">0</strong><span>ردود اليوم</span></div>
+              <div class="sstat"><strong id="sessPMs">0</strong><span>رسائل اليوم</span></div>
+              <div class="sstat"><strong id="sessRate">-</strong><span>نسبة النجاح</span></div>
+            </div>
+          </div>
+          <div style="margin-top:14px">
+            <div class="sub-block-header">
+              <h4>تقرير آخر عملية جماعية</h4>
+              <div class="inline-actions">
+                <button id="exportBulkReportJsonBtn" class="small-btn soft">تقرير JSON</button>
+                <button id="exportBulkReportCsvBtn" class="small-btn soft">تقرير CSV</button>
+              </div>
+            </div>
+            <div id="bulkReportBox" class="report-box">لا يوجد تقرير جماعي محفوظ حتى الآن.</div>
+          </div>
+          <div style="margin-top:14px">
+            <div class="sub-block-header">
+              <h4>سجل الردود والرسائل</h4>
+              <div class="inline-actions">
+                <button id="exportLogJsonBtn" class="small-btn soft">تصدير JSON</button>
+                <button id="exportLogCsvBtn" class="small-btn soft">تصدير CSV</button>
+                <button id="clearLogBtn" class="small-btn warn-btn">مسح السجل</button>
+              </div>
+            </div>
+            <div id="interactionLogsList" class="list-box"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TRACKING SUB-PANEL ─────────────────────────────────── -->
+      <section id="tab-tracking" class="tab-panel">
+        <div class="section-hero">
+          <div>
+            <div class="eyebrow">Tracking</div>
+            <h3>متابعة مباشرة لأداء الحملة والطابور</h3>
+            <p>اعرف مكانك داخل الطابور ونسبة النجاح والحالات المعلقة بدون الحاجة للتنقل بين نوافذ مختلفة.</p>
+          </div>
+          <div class="hero-chip">Live Logs</div>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <div class="card-headline compact-head">
+              <h3>حالة الطابور</h3>
+              <span class="chip subtle">Queue</span>
+            </div>
+            <div id="queueStateBox" class="state-box">جاهز</div>
+            <div id="queueMeta" class="note">لا توجد حملة قيد التشغيل</div>
+          </div>
+          <div class="card">
+            <div class="card-headline compact-head">
+              <h3>إحصائيات مباشرة</h3>
+              <span class="chip">Realtime</span>
+            </div>
+            <div class="stats-grid">
+              <div><strong id="statSuccess">0</strong><span>نجاح</span></div>
+              <div><strong id="statPending">0</strong><span>قيد الانتظار</span></div>
+              <div><strong id="statFail">0</strong><span>فشل</span></div>
+              <div><strong id="statTotal">0</strong><span>إجمالي</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <div class="card-headline compact-head">
+            <h3>سجل النشر</h3>
+            <span class="chip subtle">Logs</span>
+          </div>
+          <div id="campaignRateBar" class="campaign-rate"></div>
+          <div id="trackingLog" class="list-box tall"></div>
+        </div>
+      </section>
+
+    </div>
+    <!-- /tab-tool2 -->
+
+    <!-- ─────────────────────────────────────────────────────────────
+         PANEL 4 — الخطط والاشتراك (Pricing)
+         ───────────────────────────────────────────────────────────── -->
+    <div class="d-panel" id="tab-pricing-page">
+      <div class="pricing-section">
+
+        <div class="pricing-header">
+          <h2>خطط الاشتراك</h2>
+          <p>اختر الخطة التي تناسب حجم عملك — جميع الخطط تشمل الميزات الأساسية الكاملة.</p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <!-- Monthly -->
+          <div class="pricing-card">
+            <div class="pricing-badge badge-green">شهري</div>
+            <div class="pricing-card-name">الشهرية</div>
+            <div class="pricing-price">
+              <span class="egp">EGP</span> 99
+              <span class="period">/ شهر</span>
+            </div>
+            <div class="pricing-desc">مثالية للبداية — وصول كامل للأدوات الأساسية.</div>
+            <ul class="pricing-features">
+              <li><span class="pf-check">✓</span> اكتشاف الجروبات</li>
+              <li><span class="pf-check">✓</span> النشر التلقائي بالطابور</li>
+              <li><span class="pf-check">✓</span> توليد المحتوى بالذكاء الاصطناعي</li>
+              <li><span class="pf-check">✓</span> تصدير JSON / CSV</li>
+            </ul>
+            <button class="pricing-cta cta-basic" type="button" data-pay-plan="الخطة الشهرية" data-pay-price="99">الاشتراك الشهري</button>
+          </div>
+
+          <!-- Quarterly — Most Popular -->
+          <div class="pricing-card popular">
+            <div class="pricing-badge badge-violet">🔥 الأكثر طلباً</div>
+            <div class="pricing-card-name">الربع سنوية</div>
+            <div class="pricing-price">
+              <span class="egp">EGP</span> 499
+              <span class="period">/ 3 شهور</span>
+            </div>
+            <div class="pricing-desc">وفر ~20% مقارنة بالشهري — مثالية لمستخدمي التشغيل المستمر.</div>
+            <ul class="pricing-features">
+              <li><span class="pf-check">✓</span> جميع ميزات الخطة الشهرية</li>
+              <li><span class="pf-check">✓</span> أولوية في الدعم الفني</li>
+              <li><span class="pf-check">✓</span> قوالب متقدمة غير محدودة</li>
+              <li><span class="pf-star">★</span> تحليل المنافسين المتقدم</li>
+            </ul>
+            <button class="pricing-cta cta-violet" type="button" data-pay-plan="الخطة الربع سنوية" data-pay-price="499">الاشتراك الربع سنوي</button>
+          </div>
+
+          <!-- Semi-Annual -->
+          <div class="pricing-card semi">
+            <div class="pricing-badge badge-teal">نصف سنوي</div>
+            <div class="pricing-card-name">النصف سنوية</div>
+            <div class="pricing-price">
+              <span class="egp">EGP</span> 899
+              <span class="period">/ 6 شهور</span>
+            </div>
+            <div class="pricing-desc">وفر ~33% مقارنة بالشهري — للمحترفين الجادين في التوسع.</div>
+            <ul class="pricing-features">
+              <li><span class="pf-check">✓</span> جميع ميزات الربع سنوي</li>
+              <li><span class="pf-check">✓</span> حملات غير محدودة</li>
+              <li><span class="pf-check">✓</span> Spintax تنويع نصوص</li>
+              <li><span class="pf-star">★</span> إحصائيات تفصيلية متقدمة</li>
+            </ul>
+            <button class="pricing-cta cta-teal" type="button" data-pay-plan="الخطة النصف سنوية" data-pay-price="899">الاشتراك النصف سنوي</button>
+          </div>
+
+          <!-- Annual — Best Value -->
+          <div class="pricing-card annual">
+            <div class="pricing-badge badge-gold">👑 أكثر توفيراً</div>
+            <div class="pricing-card-name">السنوية</div>
+            <div class="pricing-price">
+              <span class="egp">EGP</span> 1,499
+              <span class="period">/ سنة</span>
+            </div>
+            <div class="pricing-desc">وفر ~46% مقارنة بالشهري — الاستثمار الأمثل للنمو طويل المدى.</div>
+            <ul class="pricing-features">
+              <li><span class="pf-check">✓</span> جميع ميزات النصف سنوي</li>
+              <li><span class="pf-star">★</span> دعم أولوية قصوى مباشر</li>
+              <li><span class="pf-star">★</span> مميزات تجريبية حصرية أولاً</li>
+              <li><span class="pf-star">★</span> تقارير أداء شهرية مخصصة</li>
+            </ul>
+            <button class="pricing-cta cta-gold" type="button" data-pay-plan="الخطة السنوية" data-pay-price="1499">الاشتراك السنوي</button>
+          </div>
+
+        </div>
+        <!-- /pricing-grid -->
+
+        <!-- Payment Methods -->
+        <div class="pricing-payment">
+          <div class="pricing-payment-title">طرق الدفع المتاحة</div>
+          <div class="payment-options">
+            <div class="pay-opt pay-vodafone">
+              <span class="pay-icon">📱</span>
+              <span class="pay-name">Vodafone Cash</span>
+              <span class="pay-num">01080236940</span>
+            </div>
+            <div class="pay-opt pay-fawry">
+              <span class="pay-icon">🏪</span>
+              <span class="pay-name">واتساب التفعيل</span>
+              <span class="pay-num">تفعيل يدوي سريع بعد التحويل</span>
+            </div>
+            <div class="pay-opt pay-card">
+              <span class="pay-icon">💳</span>
+              <span class="pay-name">مدة التجربة</span>
+              <span class="pay-num">3 أيام مجانية لأول تسجيل</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /tab-pricing-page -->
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SCHEDULE PANEL
+         ═══════════════════════════════════════════════════════════════ -->
+    <div id="tab-schedule" class="d-panel" role="tabpanel">
+      <div class="section-hero">
+        <div>
+          <div class="eyebrow">Scheduler</div>
+          <h3>جدولة الحملات</h3>
+          <p>حدد وقتاً مستقبلياً لتشغيل حملتك تلقائياً — بدون الحاجة لفتح الإضافة في ذلك الوقت.</p>
+        </div>
+        <span class="hero-chip">📅 Powered by chrome.alarms</span>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head">
+          <h3>جدولة حملة جديدة</h3>
+          <span class="chip subtle">New</span>
+        </div>
+        <div class="note" style="margin-top:0;margin-bottom:14px;">
+          💡 سيتم استخدام المجموعات والمحتوى المحفوظ حالياً في تبويب "الحملات". تأكد من إعدادهم قبل الجدولة.
+        </div>
+        <div id="scheduleForm">
+          <div class="grid two compact">
+            <label><span>📝 اسم الحملة</span>
+              <input id="scheduleTitle" type="text" placeholder="مثال: حملة عروض الجمعة">
+            </label>
+            <label><span>📅 التاريخ والوقت</span>
+              <input id="scheduleDateTime" type="datetime-local">
+            </label>
+          </div>
+          <div class="actions-row">
+            <button id="scheduleBtn" class="primary-btn">📅 جدول الحملة</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head">
+          <h3>الحملات المجدولة</h3>
+        </div>
+        <div id="scheduleList" class="list-box">
+          <div class="empty-state">لا توجد حملات مجدولة بعد.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         ANALYTICS PANEL
+         ═══════════════════════════════════════════════════════════════ -->
+    <div id="tab-analytics" class="d-panel" role="tabpanel">
+      <div class="section-hero">
+        <div>
+          <div class="eyebrow">Analytics</div>
+          <h3>لوحة التحليلات</h3>
+          <p>تتبع أداء حملاتك عبر الزمن — نجاحات، إخفاقات، وأفضل أوقات النشر.</p>
+        </div>
+        <span class="hero-chip">📊 آخر 14 يوم</span>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head">
+          <h3>نشاط النشر — آخر <span id="analyticsDays">14</span> يوم</h3>
+          <div style="display:flex;gap:16px;font-size:12px;">
+            <span style="color:var(--ok);">✅ نجاح: <strong id="analyticsOk">0</strong></span>
+            <span style="color:var(--err);">❌ فشل: <strong id="analyticsFail">0</strong></span>
+            <span style="color:var(--t2);">📊 الكل: <strong id="analyticsTotal">0</strong></span>
+          </div>
+        </div>
+        <div style="background:rgba(14,12,16,0.70);border:1px solid var(--b1);border-radius:12px;padding:12px;overflow:hidden;">
+          <canvas id="analyticsCanvas" style="width:100%;height:180px;display:block;"></canvas>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px;font-size:11px;color:var(--t3);">
+          <span>🟡 = منشور ناجح</span>
+          <span>🔴 = منشور فاشل</span>
+          <span style="margin-right:auto;">يتحدث كل 30 ثانية تلقائيًا</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head"><h3>أفضل أوقات النشر</h3></div>
+        <div id="bestTimesEl" class="note">
+          سيتم حساب أفضل الأوقات تلقائياً بعد تجميع بيانات كافية (10+ منشور على الأقل).
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         A/B TESTING PANEL
+         ═══════════════════════════════════════════════════════════════ -->
+    <div id="tab-abtest" class="d-panel" role="tabpanel">
+      <div class="section-hero">
+        <div>
+          <div class="eyebrow">A/B Testing</div>
+          <h3>اختبار النسختين</h3>
+          <p>جرّب نسختين مختلفتين من نص المنشور، وتتبّع أيهما يحقق نجاحاً أعلى عبر الزمن.</p>
+        </div>
+        <span class="hero-chip">🎲 Random Split</span>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head">
+          <h3>النسختان</h3>
+          <div id="abActiveLabel" style="font-size:12px;color:var(--p2);font-weight:700;"></div>
+        </div>
+        <div class="grid two compact">
+          <label><span>📝 النسخة A</span>
+            <textarea id="abVariantA" rows="6" placeholder="محتوى النسخة الأولى…"></textarea>
+          </label>
+          <label><span>📝 النسخة B</span>
+            <textarea id="abVariantB" rows="6" placeholder="محتوى النسخة الثانية…"></textarea>
+          </label>
+        </div>
+        <div class="actions-row">
+          <button id="abSaveBtn" class="ghost-btn">💾 حفظ النسختين</button>
+          <button id="abRunBtn" class="primary-btn">🎲 اختر نسخة عشوائياً وابدأ</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head"><h3>📊 إحصاءات A/B</h3></div>
+        <div id="abStatsEl">
+          <div class="empty-state">ابدأ تشغيل A/B لترى الإحصاءات هنا.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         MULTI-PROFILE PANEL
+         ═══════════════════════════════════════════════════════════════ -->
+    <div id="tab-profiles" class="d-panel" role="tabpanel">
+      <div class="section-hero">
+        <div>
+          <div class="eyebrow">Multi-Profile</div>
+          <h3>إدارة البروفايلات</h3>
+          <p>احفظ مجموعة إعدادات كاملة (مجموعات، محتوى، مفاتيح AI) باسم بروفايل — وبدّل بينها بنقرة واحدة.</p>
+        </div>
+        <span class="hero-chip">👤 Profile Switcher</span>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head">
+          <h3>حفظ بروفايل جديد</h3>
+          <span class="chip subtle">Snapshot الإعدادات الحالية</span>
+        </div>
+        <div class="note" style="margin-top:0;margin-bottom:12px;">
+          💡 سيتم حفظ: المجموعات المحددة، محتوى الحملة، إعدادات التأخير، مفاتيح الذكاء الاصطناعي، والقوالب — كلها معاً في بروفايل واحد.
+        </div>
+        <label><span>اسم البروفايل</span>
+          <input id="profileNameInput" type="text" placeholder="مثال: حملة العقارات — القاهرة">
+        </label>
+        <div class="actions-row">
+          <button id="profileSaveBtn" class="primary-btn">💾 حفظ البروفايل الحالي</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-headline compact-head"><h3>البروفايلات المحفوظة</h3></div>
+        <div id="profileList" class="list-box">
+          <div class="empty-state">لا توجد بروفايلات محفوظة بعد.</div>
+        </div>
+      </div>
+    </div>
+
+      <div id="tab-referral" class="d-panel" role="tabpanel">
+        <div id="referralSection">
+          <div><div class="eyebrow">Referral System</div>
+            <h3>نظام الإحالة</h3>
+            <p>شارك رابطك الخاص واكسب مكافآت على كل مشترك جديد يسجّل عبرك.</p>
+          </div>
+          <span class="hero-chip">🎁 Earn Rewards</span>
+        </div>
+        <div class="card">
+          <div class="card-headline compact-head"><h3>رابط الإحالة الخاص بك</h3></div>
+          <div style="background:var(--s3);border:1px solid var(--b2);border-radius:12px;padding:16px;text-align:center;margin-bottom:14px;">
+            <div style="font-size:11px;color:var(--t3);margin-bottom:6px;">كود الإحالة</div>
+            <div id="referralCode" style="font-size:28px;font-weight:900;color:var(--p2);letter-spacing:3px;font-family:monospace;">—</div>
+          </div>
+          <div style="background:var(--s3);border:1px solid var(--b1);border-radius:12px;padding:12px;margin-bottom:14px;">
+            <div style="font-size:11px;color:var(--t3);margin-bottom:4px;">رابط الإحالة</div>
+            <div id="referralLink" style="font-size:12px;color:var(--t3);word-break:break-all;"></div>
+          </div>
+          <div style="text-align:center;margin-bottom:14px;">
+            <div style="font-size:13px;color:var(--t2);">إجمالي المُحالين</div>
+            <div id="referralCount" style="font-size:36px;font-weight:900;color:var(--ok);">0</div>
+          </div>
+          <div class="actions-row">
+            <button id="copyReferralBtn" class="primary-btn flex1">📋 نسخ الرابط</button>
+            <button id="shareWhatsAppBtn" class="btn-ok btn" style="flex:1;justify-content:center;">💚 مشاركة واتساب</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-headline compact-head"><h3>كيف يعمل نظام الإحالة؟</h3></div>
+          <div class="list-box" style="max-height:none;">
+            <div class="row-item"><div class="row-title">1. شارك رابطك</div><div class="row-meta">أرسل رابط الإحالة لأصدقائك ومعارفك من المسوّقين</div></div>
+            <div class="row-item"><div class="row-title">2. يسجّلون عبر رابطك</div><div class="row-meta">عند تسجيلهم ودفعهم — يُحسب لك كإحالة ناجحة</div></div>
+            <div class="row-item"><div class="row-title">3. تكسب مكافأة</div><div class="row-meta">تواصل مع الدعم على واتساب لتحصيل مكافأتك</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-bestgroups" class="d-panel" role="tabpanel">
+        <div class="section-hero">
+          <div><div class="eyebrow">Smart Report</div>
+            <h3>أفضل مجموعاتك 🏆</h3>
+            <p>مرتّبة حسب نسبة النجاح الفعلية — ركّز جهودك على الأعلى أداءً.</p>
+          </div>
+          <span class="hero-chip">📊 مبني على بياناتك</span>
+        </div>
+        <div class="card">
+          <div class="card-headline compact-head">
+            <h3>أفضل 10 مجموعات</h3>
+            <button class="ghost-btn small-btn" id="refreshBestGroupsBtn">🔄 تحديث</button>
+          </div>
+          <div id="bestGroupsEl" class="list-box tall">
+            <div class="empty-state">انشر في 5+ مجموعات أولاً لتظهر هنا أفضل مجموعاتك.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-webhook" class="d-panel" role="tabpanel">
+        <div class="section-hero">
+          <div><div class="eyebrow">Notifications</div>
+            <h3>إشعارات واتساب / تيليجرام</h3>
+            <p>استقبل تقرير كل حملة تلقائياً على واتساب أو تيليجرام فور انتهائها.</p>
+          </div>
+          <span class="hero-chip">📲 Auto Reports</span>
+        </div>
+        <div class="card">
+          <div class="card-headline compact-head"><h3>إعدادات الإشعارات</h3></div>
+          <div class="note" style="margin-top:0;margin-bottom:14px;">
+            <strong>واتساب:</strong> أدخل <code style="color:var(--p3)">https://wa.me/201XXXXXXXXX</code><br/>
+            <strong>تيليجرام:</strong> أدخل <code style="color:var(--p3)">https://api.telegram.org/bot&lt;TOKEN&gt;/sendMessage?chat_id=&lt;ID&gt;</code><br/>
+            <strong>Webhook عام:</strong> أي رابط POST يقبل JSON
+          </div>
+          <label class="checkbox-line" style="margin-bottom:12px;">
+            <input type="checkbox" id="webhookEnabled"/>
+            <span style="font-size:13px;font-weight:700;">تفعيل الإشعارات بعد كل حملة</span>
+          </label>
+          <label><span>رابط الإشعار (واتساب / تيليجرام / webhook)</span>
+            <input id="webhookUrl" type="url" placeholder="https://wa.me/201XXXXXXXXX">
+          </label>
+          <div class="actions-row">
+            <button id="webhookSaveBtn" class="primary-btn">💾 حفظ الإعدادات</button>
+            <button id="webhookTestBtn" class="ghost-btn">📤 إرسال تجريبي</button>
+          </div>
+        </div>
+      </div>
+
+  </main>
+</div>
+
+<div id="dashToast" class="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     ORIGINAL EXTENSION SCRIPT — DO NOT MODIFY
+     ═══════════════════════════════════════════════════════════════════ -->
+<script src="dashboard.js"></script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     TAB ROUTER — switchTab() aligned with user spec
+     Uses .active class (compatible with existing CSS .d-panel.active)
+     Isolated: never touches dashboard.js automation logic
+     ═══════════════════════════════════════════════════════════════════ -->
+
+
+
+<!-- ══ VODAFONE CASH / WHATSAPP PAYMENT MODAL ════════════════════════
+     CSP-safe: zero inline scripts, onclick, onmouseover, onfocus.
+     All behaviour in pay-modal.js via event delegation.
+     IDs: pay-modal-overlay, sender-number, plan-amount-readonly
+     ════════════════════════════════════════════════════════════════ -->
+<div id="pay-modal-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(2,1,6,0.90);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:linear-gradient(160deg,rgba(18,12,40,0.99),rgba(10,6,22,0.99));border:1px solid rgba(45,212,191,0.34);border-radius:24px;width:100%;max-width:460px;box-shadow:0 28px 70px rgba(2,1,8,0.75),0 0 0 1px rgba(14,165,233,0.14),inset 0 1px 0 rgba(255,255,255,0.04);overflow:hidden;font-family:'Cairo',Tajawal,Arial,sans-serif;direction:rtl;max-height:92vh;overflow-y:auto;">
+    <!-- Modal header -->
+    <div style="padding:18px 20px 16px;border-bottom:1px solid rgba(45,212,191,0.18);background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(45,212,191,0.08));display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div>
+        <div style="font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#3b82f6;margin-bottom:4px;">💳 تأكيد الاشتراك</div>
+        <div style="font-size:17px;font-weight:800;color:#f6fbff;" id="pay-modal-plan-name">—</div>
+      </div>
+      <button id="pay-modal-close-btn" data-pay-close="true" type="button" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#9ec6dc;font-size:18px;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;">✕</button>
+    </div>
+    <!-- Modal body -->
+    <div style="padding:20px;">
+      <!-- Step 1 — Vodafone Cash -->
+      <div style="background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.28);border-radius:16px;padding:16px;margin-bottom:16px;text-align:center;">
+        <div style="font-size:11px;font-weight:700;color:#fca5a5;letter-spacing:0.8px;margin-bottom:10px;">📱 الخطوة ١ — حوّل المبلغ على فودافون كاش</div>
+        <div id="vf-cash-num" style="font-size:26px;font-weight:900;color:#fff;letter-spacing:3px;font-family:'Courier New',monospace;cursor:pointer;padding:8px 16px;border-radius:10px;display:inline-block;transition:background 0.2s;user-select:all;" title="انقر مرتين لنسخ الرقم">01080236940</div>
+        <div style="font-size:10px;color:#9ca3af;margin-top:6px;">انقر مرتين على الرقم لنسخه تلقائياً 📋</div>
+      </div>
+      <!-- Plan amount readonly -->
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:12px;color:#9ec6dc;font-weight:700;margin-bottom:7px;">💰 قيمة الخطة المختارة</label>
+        <input id="plan-amount-readonly" type="text" readonly style="width:100%;padding:11px 14px;background:rgba(45,212,191,0.09);border:1px solid rgba(45,212,191,0.28);border-radius:12px;color:#d9f3ff;font-size:16px;font-weight:800;text-align:center;font-family:'Courier New',monospace;cursor:default;outline:none;box-sizing:border-box;" />
+      </div>
+      <!-- Sender number -->
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:12px;color:#9ec6dc;font-weight:700;margin-bottom:7px;">📲 الخطوة ٢ — رقم الهاتف الذي حوّلت منه *</label>
+        <input id="sender-number" type="tel" dir="ltr" placeholder="مثال: 01xxxxxxxxx" style="width:100%;padding:11px 14px;background:rgba(8,22,38,0.72);border:1px solid rgba(45,212,191,0.24);border-radius:12px;color:#f6fbff;font-size:15px;font-family:'Courier New',monospace;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box;" />
+      </div>
+      <!-- Screenshot upload -->
+      <div style="margin-bottom:18px;">
+        <label style="display:block;font-size:12px;color:#9ec6dc;font-weight:700;margin-bottom:7px;">🖼️ الخطوة ٣ — اسكرين شوت التحويل (أرسله عبر واتساب)</label>
+        <label id="pay-upload-label" for="pay-screenshot" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:22px;border:2px dashed rgba(45,212,191,0.32);border-radius:16px;background:rgba(45,212,191,0.05);cursor:pointer;transition:border-color 0.2s,background 0.2s;">
+          <span style="font-size:30px;">📎</span>
+          <span style="font-size:12.5px;color:#9ec6dc;text-align:center;font-family:'Cairo',Arial,sans-serif;">اضغط لرفع اسكرين شوت للتحويل</span>
+          <span style="font-size:10px;color:#6b7280;">PNG · JPG · WEBP — أرسله يدوياً عبر واتساب بعد فتح المحادثة</span>
+        </label>
+        <input id="pay-screenshot" type="file" accept="image/*" style="display:none;" />
+      </div>
+      <!-- WhatsApp CTA -->
+      <button id="pay-wa-btn" data-pay-send="true" type="button" style="width:100%;padding:15px;background:linear-gradient(135deg,#16a34a,#22c55e,#4ade80);border:none;border-radius:14px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Cairo',Arial,sans-serif;box-shadow:0 8px 24px rgba(34,197,94,0.40);transition:filter 0.2s,transform 0.15s,box-shadow 0.2s;letter-spacing:0.3px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        إرسال للتفعيل عبر واتساب
+      </button>
+      <div style="text-align:center;margin-top:12px;font-size:11px;color:#6b7280;font-family:'Cairo',Arial,sans-serif;">سيتم فتح محادثة واتساب جاهزة بتفاصيل الاشتراك · التفعيل فوري ⚡</div>
+    </div>
+  </div>
+</div>
+
+<script src="dashboard-router.js"></script>
+<script src="pay-modal.js"></script>
+</body>
+</html>

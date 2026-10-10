@@ -67,7 +67,7 @@ if (!$filename && file_exists($root . '/updates.xml')) {
 }
 if (!$filename) {
     $zips = glob($root . '/fb-bablushr-f-v*.zip') ?: [];
-    // فضّل 16.5.19 ثم الأحدث بالتاريخ
+    // فضّل إصدار 16.5.22 ثم الأحدث بالتاريخ
     usort($zips, static function ($a, $b) {
         $pa = preg_match('/v(\d+\.\d+\.\d+)/', basename($a), $ma) ? $ma[1] : '0';
         $pb = preg_match('/v(\d+\.\d+\.\d+)/', basename($b), $mb) ? $mb[1] : '0';
@@ -83,7 +83,7 @@ if (!$filename) {
 if (!$filename || !preg_match('/^[\w\-. ]+\.zip$/i', $filename)) {
     http_response_code(404);
     header('Content-Type: text/plain; charset=UTF-8');
-    echo 'ملف الإضافة غير موجود على السيرفر — ارفع fb-bablushr-f-v16.5.19-extension.zip إلى جذر الموقع.';
+    echo 'ملف الإضافة غير موجود على السيرفر — ارفع fb-bablushr-f-v16.5.22-extension.zip إلى جذر الموقع.';
     exit;
 }
 $filepath = $root . '/' . $filename;

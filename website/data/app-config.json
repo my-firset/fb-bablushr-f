@@ -1,0 +1,63 @@
+{
+  "extension_version": "16.5.22",
+  "extension_filename": "fb-bablushr-f-v16.5.22-extension.zip",
+  "public_downloads": false,
+  "release_log": [
+    {
+      "version": "16.5.6",
+      "filename": "fb-bablushr-f-v16.5.6-extension.zip",
+      "notes": "إصلاح: زرار الوضع الليلي/النهاري كان بيتعطل تمامًا على الموبايل لو محاولة فتح تبويب كامل الشاشة فشلت في إغلاق النافذة القديمة بصمت",
+      "uploaded_at": "2026-07-24 00:00:00",
+      "zip_uploaded": true
+    },
+    {
+      "version": "16.5.5",
+      "filename": "fb-bablushr-f-v16.5.5-extension.zip",
+      "notes": "طبقة بصمة متصفح إضافية ضد تكرار التجربة المجانية بعد إعادة التثبيت + رسائل خطأ واضحة لتسجيل الدخول (حد الأجهزة/التجربة المستخدمة) + زر تجديد تجربة 3 أيام لكل مستخدم من لوحة الأدمن",
+      "uploaded_at": "2026-07-18 00:00:00",
+      "zip_uploaded": true
+    },
+    {
+      "version": "16.5.4",
+      "filename": "fb-bablushr-f-v16.5.4-extension.zip",
+      "notes": "إضافة مؤشر بصري (بادج ↗) على زرار لوحة الويب لتوضيح إنه بيفتح تبويب منفصل",
+      "uploaded_at": "2026-07-17 00:00:00",
+      "zip_uploaded": true
+    },
+    {
+      "version": "16.5.3",
+      "filename": "fb-bablushr-f-v16.5.3-extension.zip",
+      "notes": "مفتاح توقيع ثابت (Extension ID دائم) + إصلاح زرارين معطّلين بصمت بسبب CSP + إصلاح كشف Kiwi Fullscreen المعطّل + تفعيل التحديث التلقائي الحقيقي عبر updates.xml",
+      "uploaded_at": "2026-07-14 00:00:00",
+      "zip_uploaded": true
+    },
+    {
+      "version": "16.5.2",
+      "filename": "fb-bablushr-f-v16.5.2-extension.zip",
+      "notes": "أمان: توكين تحميل مؤقت منفصل عن جلسة الإضافة + كشف تحايل بالـ IP على قفل التجربة + إصلاح نقطة فحص التحديثات (version.php)",
+      "uploaded_at": "2026-07-13 00:00:00",
+      "zip_uploaded": true
+    },
+    {
+      "version": "16.5.1",
+      "filename": "fb-bablushr-f-v16.5.1-extension.zip",
+      "notes": "إصلاح تسجيل التعليق الأول وتتبع فشله + تخطي ذكي للجروبات (2+ منشورات معلّقة) + توحيد كامل لثيم Verdigris + إصلاح تسجيل دخول الجهاز",
+      "uploaded_at": "2026-07-07 00:00:00",
+      "zip_uploaded": true
+    },
+    {
+      "version": "16.5.0",
+      "filename": "fb-bablushr-f-v16.5.0-extension.zip",
+      "notes": "Verdigris Theme — توحيد الهوية البصرية بين الإضافة والموقع بثيم تركوازي احترافي جديد",
+      "uploaded_at": "2026-07-03 00:00:00",
+      "zip_uploaded": true
+    },
+    {
+      "version": "16.3.0",
+      "filename": "fb-bablushr-f-v16.3.0-extension.zip",
+      "notes": "Phantom Noir Premium Suite — نشر بالذكاء الاصطناعي مع واجهة احترافية",
+      "uploaded_at": "2026-06-29 00:00:00",
+      "zip_uploaded": true
+    }
+  ]
+}

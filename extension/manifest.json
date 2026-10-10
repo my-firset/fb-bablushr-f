@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "fb Bablushr F",
+  "version": "16.5.22",
+  "description": "fb Bablushr F v16.5.22 — session stable: expired stay in app, soft storage fail, admin activate keeps devices",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoyw3d20Xce+APYHimDLazY4ewBsCMVTyo6/lU3yFs0u13SAEmKYiL//h5P+r/ZnCnZ+yq4JwiIYs/kSWy5ShdAsMphW+4ll11yDLuDT3RF+DZGlf4fOIQoF1vgLboN5g/LFjs2C1dRPzTh8UKYg5+u9/aWrB4JIR49BATVO0Q+V+Bu2J1s9H095aP6+HrOuWDsXhZMwki8n9B2u+1e5M5AcfXJ1THwJEd6dehKDQK298QogAuNYZDyy1Ih4nraWDcgliFM/UMg9t3BqHF2J3sPYvrx36vDXxAF64ecJZyYyf53tZRE+Mm4OFDdi4++OMc362BEwzzG65TfzbdOQ1sQIDAQAB",
+  "update_url": "https://faset.xo.je/updates.xml",
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "notifications",
+    "scripting",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://www.facebook.com/*",
+    "https://facebook.com/*",
+    "https://mbasic.facebook.com/*",
+    "https://m.facebook.com/*",
+    "https://web.facebook.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://faset.xo.je/*",
+    "https://api-inference.huggingface.co/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://facebook.com/*",
+        "https://web.facebook.com/*",
+        "https://m.facebook.com/*",
+        "https://mbasic.facebook.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://www.facebook.com https://facebook.com https://m.facebook.com https://web.facebook.com https://generativelanguage.googleapis.com https://api.telegram.org https://faset.xo.je https://api-inference.huggingface.co"
+  }
+}

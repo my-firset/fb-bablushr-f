@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/>
+  <title>FB Publisher X — Stealth Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="popup.css"/>
+
+  <script src="theme-sync.js"></script>
+</head>
+<body class="dark">
+<script src="fullscreen-detect.js"></script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     LANDING PAGE — صفحة الهبوط المصغرة
+     مخفية بعد تسجيل الدخول، لا علاقة لها بمحرك النشر
+     ══════════════════════════════════════════════════════════════ -->
+<div id="landingPage">
+
+  <!-- ══ شريط التنقل العلوي ══════════════════════════════════════════ -->
+  <nav class="lp-nav">
+    <div class="lp-nav-logo">
+      <div class="bablushr-logo-container" style="background:transparent!important;display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:38px;height:38px;flex-shrink:0;overflow:visible;">
+          <defs>
+            <linearGradient id="hexGrad_lp" x1="10" y1="5" x2="90" y2="95" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#1e3a8a"/>
+              <stop offset="100%" stop-color="#3b82f6"/>
+            </linearGradient>
+            <linearGradient id="fGrad_lp" x1="38" y1="28" x2="60" y2="72" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#22d3ee"/>
+            </linearGradient>
+          </defs>
+          <polygon points="50,5 90,25 90,75 50,95 10,75 10,25"
+            stroke="url(#hexGrad_lp)" stroke-width="4"
+            style="fill:rgba(10,18,35,0.90)!important;"/>
+          <path d="M65 35C70 42 70 58 65 65"
+            stroke="#3b82f6" stroke-width="3" stroke-linecap="round"
+            style="fill:none!important;"/>
+          <path d="M72 27C80 38 80 62 72 73"
+            stroke="#22d3ee" stroke-width="2" stroke-linecap="round"
+            style="fill:none!important;"/>
+          <path d="M38 72V28H60M38 48H52"
+            stroke="url(#fGrad_lp)" stroke-width="8"
+            stroke-linecap="round" stroke-linejoin="round"
+            style="fill:none!important;"/>
+        </svg>
+        <div style="background:transparent!important;display:flex;flex-direction:column;text-align:right;gap:1px;">
+          <span class="lp-brand-name">fb Bablushr F</span>
+          <span class="lp-brand-tag">● STEALTH ENGINE</span>
+        </div>
+      </div>
+    </div>
+    <div class="lp-nav-right">
+      <span class="lp-version-chip" id="lpVersionChip">v16.5.22</span>
+      <button id="lpThemeToggle" class="lp-theme-btn" title="تغيير الوضع ليلي / نهاري" type="button">
+        <svg id="lpSunIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="lpMoonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ════════════════════════════════════════════════════════ -->
+  <section class="lp-hero">
+    <div class="lp-hero-badge">⚡ محرك النشر الاحترافي للمسوّقين</div>
+    <h1 class="lp-h1">أتمتة التسويق<br/><span class="lp-h1-accent">على فيسبوك بذكاء</span></h1>
+    <p class="lp-hero-desc">
+      انشر في مئات المجموعات دفعةً واحدة في الخلفية · تنويع تلقائي للنصوص لكل جروب ·
+      ذكاء اصطناعي مدمج · يعمل على كروم وكيوي أندرويد
+    </p>
+    <div class="lp-stats-row">
+      <div class="lp-stat-pill">
+        <span class="lp-stat-n">500+</span>
+        <span class="lp-stat-l">جروب دفعة واحدة</span>
+      </div>
+      <div class="lp-stat-pill">
+        <span class="lp-stat-n">99%</span>
+        <span class="lp-stat-l">معدل نجاح النشر</span>
+      </div>
+      <div class="lp-stat-pill">
+        <span class="lp-stat-n">0</span>
+        <span class="lp-stat-l">كشف من فيسبوك</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ المميزات ═══════════════════════════════════════════════════ -->
+  <section class="lp-feats-section">
+    <h2 class="lp-section-ttl">كل ما تحتاجه · في مكان واحد</h2>
+    <div class="lp-feats-grid">
+      <div class="lp-feat-card">
+        <div class="lp-feat-icon-wrap lp-fi-blue">⚡</div>
+        <div class="lp-feat-body">
+          <div class="lp-feat-ttl">نشر فوري في الخلفية</div>
+          <div class="lp-feat-desc">انشر في مئات الجروبات بينما تتصفح فيسبوك بشكل طبيعي — بدون إيقاف العمل</div>
+        </div>
+      </div>
+      <div class="lp-feat-card">
+        <div class="lp-feat-icon-wrap lp-fi-gold">🤖</div>
+        <div class="lp-feat-body">
+          <div class="lp-feat-ttl">ذكاء اصطناعي مدمج</div>
+          <div class="lp-feat-desc">توليد منشورات احترافية بالعربية والإنجليزية عبر Gemini 1.5 Flash مجانًا + HuggingFace كبديل</div>
+        </div>
+      </div>
+      <div class="lp-feat-card">
+        <div class="lp-feat-icon-wrap lp-fi-green">🔄</div>
+        <div class="lp-feat-body">
+          <div class="lp-feat-ttl">تنويع النصوص Spintax</div>
+          <div class="lp-feat-desc">كل جروب يحصل على نص فريد مختلف تلقائياً — hook مختلف وCTA مختلف لكل جروب</div>
+        </div>
+      </div>
+      <div class="lp-feat-card">
+        <div class="lp-feat-icon-wrap lp-fi-purple">🔒</div>
+        <div class="lp-feat-body">
+          <div class="lp-feat-ttl">Stealth Mode متطور</div>
+          <div class="lp-feat-desc">أحرف homoglyph · تأخيرات عشوائية · Anti-detection بمستوى الوكالات لا يكشفه فيسبوك</div>
+        </div>
+      </div>
+      <div class="lp-feat-card">
+        <div class="lp-feat-icon-wrap lp-fi-blue">📊</div>
+        <div class="lp-feat-body">
+          <div class="lp-feat-ttl">تحليلات وسجل مباشر</div>
+          <div class="lp-feat-desc">تابع كل منشور لحظة بلحظة — نجح أم انتظر أم فشل، مع تقرير كامل قابل للتصدير</div>
+        </div>
+      </div>
+      <div class="lp-feat-card">
+        <div class="lp-feat-icon-wrap lp-fi-gold">📱</div>
+        <div class="lp-feat-body">
+          <div class="lp-feat-ttl">أندرويد + كيوي براوزر</div>
+          <div class="lp-feat-desc">يعمل على هاتفك بدون حاسوب — Kiwi Browser على أندرويد بنفس كفاءة الكمبيوتر</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ خطوات ═════════════════════════════════════════════════════ -->
+  <section class="lp-steps-section">
+    <h2 class="lp-section-ttl">كيف يعمل؟ — 3 خطوات فقط</h2>
+    <div class="lp-steps-row">
+      <div class="lp-step-card">
+        <div class="lp-step-num">١</div>
+        <div class="lp-step-ttl">اكتب المنشور</div>
+        <div class="lp-step-desc">اكتب نصك أو اطلب من AI كتابته لك بلغتك</div>
+      </div>
+      <div class="lp-step-arrow">←</div>
+      <div class="lp-step-card">
+        <div class="lp-step-num">٢</div>
+        <div class="lp-step-ttl">اختر الجروبات</div>
+        <div class="lp-step-desc">استكشف وأضف مئات الجروبات بنقرة واحدة</div>
+      </div>
+      <div class="lp-step-arrow">←</div>
+      <div class="lp-step-card">
+        <div class="lp-step-num">٣</div>
+        <div class="lp-step-ttl">اضغط ابدأ</div>
+        <div class="lp-step-desc">المحرك يعمل بالخلفية وأنت تتصفح بشكل طبيعي</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ خطط الأسعار ════════════════════════════════════════════════ -->
+  <section class="lp-pricing-section">
+    <h2 class="lp-section-ttl">💰 خطط الاشتراك — بالجنيه المصري</h2>
+    <p class="lp-pricing-sub">جرّب مجاناً · لا بطاقة بنكية · إلغاء في أي وقت</p>
+    <div class="lp-plans">
+      <div class="lp-plan">
+        <div class="lp-plan-name">شهري</div>
+        <div class="lp-plan-price">99 <span class="lp-egp">جنيه</span><span class="lp-usd">~$2</span><span class="lp-per">/ شهر</span></div>
+        <ul class="lp-plan-features">
+          <li>✓ نشر في الخلفية</li>
+          <li>✓ اكتشاف الجروبات</li>
+          <li>✓ AI مدمج مجاناً</li>
+          <li>✓ تحليلات مباشرة</li>
+          <li>✓ Spintax تلقائي</li>
+        </ul>
+        <button class="lp-plan-cta" type="button" data-pay-plan="الخطة الشهرية" data-pay-price="99">اشترك الآن</button>
+      </div>
+      <div class="lp-plan lp-plan-pro">
+        <div class="lp-plan-badge">الأكثر طلباً 🔥</div>
+        <div class="lp-plan-name">ربع سنوي</div>
+        <div class="lp-plan-price">499 <span class="lp-egp">جنيه</span><span class="lp-usd">~$10</span><span class="lp-per">/ 3 شهور</span></div>
+        <ul class="lp-plan-features">
+          <li>✓ كل الميزات الشهرية</li>
+          <li>⭐ دعم أولوية 24/7</li>
+          <li>⭐ حماية متعددة الحسابات</li>
+          <li>⭐ Stealth Mode متطور</li>
+          <li>✓ وفّر ~20%</li>
+        </ul>
+        <button class="lp-plan-cta" type="button" data-pay-plan="الخطة الربع سنوية" data-pay-price="499">اشترك الآن</button>
+      </div>
+      <div class="lp-plan lp-plan-semi">
+        <div class="lp-plan-name">نصف سنوي</div>
+        <div class="lp-plan-price">899 <span class="lp-egp">جنيه</span><span class="lp-usd">~$18</span><span class="lp-per">/ 6 شهور</span></div>
+        <ul class="lp-plan-features">
+          <li>✓ كل الميزات الربعية</li>
+          <li>🛡️ Anti-detection Premium</li>
+          <li>🛡️ Smart spam guard</li>
+          <li>🛡️ Kiwi Android دعم</li>
+          <li>✓ وفّر ~28%</li>
+        </ul>
+        <button class="lp-plan-cta" type="button" data-pay-plan="الخطة النصف سنوية" data-pay-price="899">اشترك الآن</button>
+      </div>
+      <div class="lp-plan lp-plan-annual">
+        <div class="lp-plan-badge lp-annual-badge">👑 للوكالات</div>
+        <div class="lp-plan-name">سنوي</div>
+        <div class="lp-plan-price">1,499 <span class="lp-egp">جنيه</span><span class="lp-usd">~$30</span><span class="lp-per">/ سنة</span></div>
+        <ul class="lp-plan-features">
+          <li>👑 VIP 1-على-1 دعم مباشر</li>
+          <li>👑 وصول مبكر للميزات</li>
+          <li>👑 API مخصص للوكالات</li>
+          <li>👑 حسابات غير محدودة</li>
+          <li>👑 وفّر ~46%</li>
+        </ul>
+        <button class="lp-plan-cta" type="button" data-pay-plan="الخطة السنوية" data-pay-price="1499">اشترك الآن</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ نموذج تسجيل الدخول ══════════════════════════════════════════ -->
+  <section class="lp-auth">
+    <div class="lp-auth-card">
+      <div class="lp-auth-tabs">
+        <button class="lp-auth-tab active" id="tabLogin" type="button">تسجيل الدخول</button>
+        <button class="lp-auth-tab" id="tabRegister" type="button">إنشاء حساب</button>
+      </div>
+      <div class="lp-status" id="lpStatus"></div>
+      <div class="lp-form">
+        <div class="lp-input-wrap">
+          <svg class="lp-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <input class="lp-input" id="lpEmail" type="email" placeholder="البريد الإلكتروني" dir="ltr" autocomplete="email"/>
+        </div>
+        <div class="lp-input-wrap">
+          <svg class="lp-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <input class="lp-input" id="lpPassword" type="password" placeholder="كلمة المرور" dir="ltr" autocomplete="current-password"/>
+          <button class="lp-pass-eye" id="lpPassToggle" type="button" title="إظهار/إخفاء">
+            <svg id="eyeShow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg id="eyeHide" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+              <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+              <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+          </button>
+        </div>
+        <button class="lp-btn-submit" id="lpSubmitBtn" type="button">
+          <span id="lpBtnLabel">دخول وابدأ النشر 🚀</span>
+          <span id="lpBtnSpinner" class="lp-spinner" style="display:none"></span>
+        </button>
+        <div class="lp-links">
+          <button class="lp-link" id="lpForgotBtn" type="button">نسيت كلمة المرور؟</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ فوتر ═══════════════════════════════════════════════════════ -->
+  <footer class="lp-footer">
+    <div class="lp-footer-trust">
+      <span>🔒 SSL مشفر</span>
+      <span>·</span>
+      <span>📱 كروم + أندرويد</span>
+      <span>·</span>
+      <span>⚡ نشر فوري</span>
+      <span>·</span>
+      <span>🛡️ Stealth Mode</span>
+    </div>
+  </footer>
+
+</div><!-- /landingPage -->
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     THE ORIGINAL APP — الإضافة الأصلية
+     مخفية حتى تسجيل الدخول
+     ══════════════════════════════════════════════════════════════ -->
+<div class="app" data-layout="adaptive" style="display:none">
+
+  <!-- ══ UPDATE NOTIFICATION BANNER ══════════════════════════════ -->
+  <div id="updateBanner" style="display:none;position:sticky;top:0;z-index:9999;
+       background:linear-gradient(90deg,#1e3a8a,#2563eb 42%,#3b82f6 100%);
+       color:#fff;padding:9px 14px;display:none;align-items:center;gap:10px;
+       box-shadow:0 2px 16px rgba(45,212,191,0.38);font-family:Cairo,Tahoma,sans-serif;">
+    <span style="font-size:16px;">🔔</span>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:800;font-size:13px;line-height:1.3;">تحديث جديد متوفر!</div>
+      <div id="updateBannerSub" style="font-size:11px;opacity:0.88;line-height:1.4;"></div>
+    </div>
+    <button id="updateBannerDismiss" style="background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);
+       border-radius:8px;color:#fff;padding:4px 10px;font-size:11px;font-weight:700;
+       cursor:pointer;white-space:nowrap;">✕ إغلاق</button>
+  </div>
+
+  <!-- ══ HEADER ══════════════════════════════════════════════════ -->
+  <div class="header">
+    <div class="header-left">
+      <div class="bablushr-logo-container" style="background:transparent!important;display:flex;align-items:center;justify-content:center;gap:10px;">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:44px;height:44px;flex-shrink:0;overflow:visible;filter:drop-shadow(0 0 10px rgba(56,189,248,0.45));">
+            <defs>
+              <linearGradient id="hexGrad_hdr" x1="10" y1="5" x2="90" y2="95" gradientUnits="userSpaceOnUse">
+                <stop offset="0%"   stop-color="#3b82f6"/>
+                <stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+              <linearGradient id="fGrad_hdr" x1="38" y1="28" x2="60" y2="72" gradientUnits="userSpaceOnUse">
+                <stop offset="0%"   stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#ccfbf1"/>
+              </linearGradient>
+            </defs>
+            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25"
+              stroke="url(#hexGrad_hdr)" stroke-width="4"
+              style="fill:rgba(10,4,21,0.90)!important;"/>
+            <path d="M65 35C70 42 70 58 65 65"
+              stroke="#3b82f6" stroke-width="3" stroke-linecap="round"
+              style="fill:none!important;"/>
+            <path d="M72 27C80 38 80 62 72 73"
+              stroke="#22d3ee" stroke-width="2" stroke-linecap="round"
+              style="fill:none!important;"/>
+            <path d="M38 72V28H60M38 48H52"
+              stroke="url(#fGrad_hdr)" stroke-width="8"
+              stroke-linecap="round" stroke-linejoin="round"
+              style="fill:none!important;"/>
+          </svg>
+        <div style="background:transparent!important;display:flex;flex-direction:column;text-align:right;gap:2px;">
+            <span style="color:#ffffff!important;background:transparent!important;font-size:15px;font-weight:800;font-family:'Cairo',sans-serif;line-height:1.2;">fb Bablushr F</span>
+            <span style="color:#3b82f6!important;background:transparent!important;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;">● ACTIVE STEALTH ENGINE</span>
+          </div>
+      </div>
+      <span class="badge badge-active" id="sessionBadge2">جاهز</span>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" id="logoutBtn" title="تسجيل الخروج" style="font-size:11px;padding:4px 8px;border-radius:6px">خروج</button>
+      <button class="icon-btn icon-btn-external" id="openDashboardBtn" title="لوحة الويب — يفتح في تبويب جديد" aria-label="فتح لوحة الويب في تبويب جديد">🌐</button>
+      <button class="icon-btn" id="themeToggle" title="الوضع الليلي ← بنفسجي ← نهاري">
+        <svg id="moonIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="sunIcon"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="violetIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polygon points="12,2 15.5,8.5 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.5,8.5" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ شريط العد التنازلي للتجربة ══════════════════════════════ -->
+  <div id="trialBar" class="trial-bar" style="display:none">
+    <span id="trialBarText">⏳ التجربة المجانية</span>
+    <button id="trialUpgradeLink" class="trial-upgrade-btn" type="button">ترقية ⬆</button>
+    <button id="trialBarClose" class="trial-bar-close" type="button">×</button>
+  </div>
+
+  <!-- ══ TABS ═════════════════════════════════════════════════════ -->
+  <div class="tabs" role="tablist" aria-label="أقسام الإضافة">
+    <button class="tab active" type="button" data-tab="compose" aria-controls="tab-compose" aria-selected="true">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      <span class="tab-label">منشور</span>
+    </button>
+    <button class="tab" type="button" data-tab="groups" aria-controls="tab-groups" aria-selected="false">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span class="tab-label">جروبات</span>
+    </button>
+    <button class="tab" type="button" data-tab="settings" aria-controls="tab-settings" aria-selected="false">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span class="tab-label">إعدادات</span>
+    </button>
+    <button class="tab" type="button" data-tab="log" aria-controls="tab-log" aria-selected="false">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <span class="tab-label">سجل</span>
+    </button>
+    <button class="tab tab-plans" type="button" data-tab="plans" aria-controls="tab-plans" aria-selected="false">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      <span class="tab-label">الخطط</span>
+    </button>
+  </div>
+
+  <!-- ══ COMPOSE TAB ══════════════════════════════════════════════ -->
+  <div id="tab-compose" class="tab-content active">
+    <!-- ── حالة النشر في الخلفية ─────────────────────────────── -->
+    <div class="bg-status-banner" id="bgStatusBanner">
+      <div class="bg-status-dot" id="bgStatusDot"></div>
+      <span class="bg-status-text" id="bgStatusText">يعمل بسلاسة في الخلفية (نشط)</span>
+      <span class="bg-status-chip" id="bgStatusChip">Active</span>
+    </div>
+
+    <div class="workspace-hero">
+      <div>
+        <div class="workspace-eyebrow">Stealth Compose</div>
+        <h3>أنشئ منشورك وابدأ الحملة في وضع خلفي أكثر ثباتًا</h3>
+        <p>اكتب المحتوى وأضف الوسائط ثم اسمح للمحرك يكمّل النشر بهدوء بينما تكمل شغلك في تبويب تاني.</p>
+      </div>
+      <div class="workspace-pill">Stealth • Queue • Publish</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          صياغة المحتوى الذكية
+        </span>
+        <span class="badge badge-ai">AI</span>
+      </div>
+      <div class="form-group">
+        <label>الموضوع / Topic</label>
+        <input type="text" id="aiTopic" placeholder="مثال: عقارات القاهرة / Real estate Cairo"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group flex1">
+          <label>النبرة</label>
+          <select id="aiTone">
+            <option value="professional">🎯 احترافي</option>
+            <option value="aggressive_sales">🔥 مبيعات قوي</option>
+            <option value="friendly">😊 ودي</option>
+            <option value="storytelling">📖 قصصي</option>
+            <option value="urgent">⚡ عاجل</option>
+            <option value="persuasive">💡 مقنع</option>
+          </select>
+        </div>
+        <div class="form-group flex1">
+          <label>النوع</label>
+          <select id="aiType">
+            <option value="post">منشور</option>
+            <option value="announcement">إعلان</option>
+            <option value="promotion">عرض</option>
+            <option value="question">سؤال تفاعلي</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>اللغة</label>
+        <select id="aiLang">
+          <option value="auto">تلقائي</option>
+          <option value="ar">العربية</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div class="hint-box">الهيكل: Hook ← مشكلة/حل ← CTA ← رابط ← #هاشتاقات</div>
+      <button class="btn btn-ai full-width" id="generateAI">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        توليد بالذكاء الاصطناعي
+      </button>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">محتوى المنشور</span>
+        <button class="icon-btn small" id="spintaxHelp" title="دليل Spintax">?</button>
+      </div>
+      <div class="form-group">
+        <label>النص <span class="muted">({خيار_أ|خيار_ب})</span></label>
+        <div id="postContent" contenteditable="true" role="textbox" aria-multiline="true" dir="auto" spellcheck="false" data-placeholder="اكتب منشورك هنا...&#10;استخدم {خيار_أ|خيار_ب} للتنويع التلقائي."></div>
+        <textarea id="postContentReal" style="display:none"></textarea>
+      </div>
+      <div class="form-group">
+        <label>رابط ثابت <span class="muted">(يُضاف مرة واحدة)</span></label>
+        <input type="url" id="fixedLink" placeholder="https://wa.me/201234567890"/>
+      </div>
+      <div id="spintaxPreview" style="display:none" class="preview-box">
+        <div class="preview-label">معاينة:</div>
+        <div id="previewText" class="preview-text"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-outline small" id="previewSpintax">معاينة</button>
+        <button class="btn btn-outline small" id="randomizeSpintax">🎲 عشوائي</button>
+        <button class="btn btn-outline small" id="clearContent">مسح</button>
+      </div>
+      <button class="btn btn-preview full-width" id="openPreviewModal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        معاينة كمنشور فيسبوك
+      </button>
+      <div class="btn-row" style="margin-top:8px">
+        <button class="btn btn-variation-active flex1" id="smartVariationBtn">تنويع النصوص: مفعّل ✓</button>
+      </div>
+      <div class="settings-item" style="margin-top:10px">
+        <div>
+          <div class="settings-label">Anti-Spam</div>
+          <div class="settings-desc">يضيف سطراً عشوائياً صغيراً قبل الرابط</div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="antiSpamRandomizer"/><span class="toggle-slider"></span></label>
+      </div>
+      <div class="settings-item" style="margin-top:8px;flex-direction:column;align-items:flex-start;gap:6px">
+        <div>
+          <div class="settings-label">📄 النشر بهوية صفحة</div>
+          <div class="settings-desc">اتركه فارغاً للنشر بملفك الشخصي</div>
+        </div>
+        <input type="text" id="postAsPage" placeholder="مثال: صالون ريلاكس كايرو" style="width:100%;box-sizing:border-box"/>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">تعليق أول تلقائي</span>
+        <label class="toggle"><input type="checkbox" id="enableComment"/><span class="toggle-slider"></span></label>
+      </div>
+      <div id="commentSection" style="display:none" class="form-group">
+        <textarea id="firstComment" rows="2" placeholder="نص التعليق الأول..."></textarea>
+      </div>
+    </div>
+    <div class="card" id="mediaCard">
+      <div class="card-header">
+        <span class="card-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          وسائط
+        </span>
+        <span class="muted" style="font-size:11px">صور + فيديو</span>
+      </div>
+      <div class="upload-area" id="imageUploadArea" role="button" tabindex="0">
+        <input type="file" id="imageInput" accept="image/*,video/*" multiple hidden/>
+        <div id="imageEmpty">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>اضغط لإضافة صور أو فيديو</p>
+          <span>JPG · PNG · MP4 مدعومة</span>
+        </div>
+        <div id="mediaStrip" style="display:none">
+          <div id="mediaItems" class="media-items"></div>
+          <button class="btn btn-outline small" id="addMoreMedia" style="margin-top:8px">+ إضافة المزيد</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ GROUPS TAB ═══════════════════════════════════════════════ -->
+  <div id="tab-groups" class="tab-content">
+    <div class="workspace-hero">
+      <div>
+        <div class="workspace-eyebrow">Audience Hub</div>
+        <h3>اختيار الجروبات وبناء القوائم</h3>
+        <p>امسح الجروبات الحالية أو ابحث عن جروبات جديدة ثم احفظها في مكتبتك لإعادة الاستخدام.</p>
+      </div>
+      <div class="workspace-pill">اكتشاف → تصنيف → تحديد</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">جلسة فيسبوك</span>
+        <span class="badge badge-inactive" id="sessionBadge">تحقق</span>
+      </div>
+      <div id="sessionInfo" class="muted small" style="margin-bottom:8px">اضغط كشف للتحقق من جلستك.</div>
+      <button class="btn btn-outline full-width" id="detectSession">كشف الجلسة</button>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">مسح الجروبات</span></div>
+      <button class="btn btn-primary full-width" id="scanGroups" style="margin-bottom:10px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        مسح الجروبات
+      </button>
+      <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="groupFilter" class="search-input" placeholder="فلترة الجروبات..."/>
+        <button class="clear-filter-btn" id="clearFilter" style="display:none">✕</button>
+      </div>
+      <div class="group-actions">
+        <button class="btn btn-outline small" id="selectAll">تحديد الكل</button>
+        <button class="btn btn-outline small" id="deselectAll">إلغاء الكل</button>
+        <button class="btn btn-outline small" id="selectFiltered" style="display:none">✔ تحديد المفلترة</button>
+      </div>
+      <div id="groupCount" class="group-count">0 جروب</div>
+      <div id="groupList" class="group-list">
+        <div class="empty-state">امسح فيسبوك لإيجاد جروباتك</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">بحث وانضمام تلقائي</span>
+        <span class="badge badge-ai">AUTO</span>
+      </div>
+      <div class="form-group">
+        <label>كلمة البحث</label>
+        <input type="text" id="groupSearchKeyword" placeholder="مثال: عقارات القاهرة"/>
+      </div>
+      <button class="btn btn-primary full-width" id="startGroupJoinSearch">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        بحث وانضمام
+      </button>
+      <div class="hint-box" style="margin-top:8px">يضيف الجروبات المنضم إليها + نتائج البحث ويُزيل التكرار.</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">قوائم محفوظة</span></div>
+      <div class="form-row">
+        <input type="text" id="presetName" placeholder="اسم القائمة..." class="flex1"/>
+        <button class="btn btn-outline" id="savePreset">حفظ</button>
+      </div>
+      <div id="presetList" class="preset-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ SETTINGS TAB ═════════════════════════════════════════════ -->
+  <div id="tab-settings" class="tab-content">
+    <div class="workspace-hero">
+      <div>
+        <div class="workspace-eyebrow">مركز التحكم</div>
+        <h3>التحكم في الأداء والهوية والذكاء الاصطناعي</h3>
+        <p>اضبط السرعة والتنوع ومفاتيح الذكاء الاصطناعي.</p>
+      </div>
+      <div class="workspace-pill">سرعة + تنويع + API</div>
+    </div>
+    <div class="card">
+      <div class="card-title">التأخير بين المجموعات</div>
+      <div class="form-row" style="margin-top:10px">
+        <div class="form-group flex1"><label>الحد الأدنى (ثانية)</label><input type="number" id="minDelay" value="0.35" min="0.25" max="3600" step="0.05"/></div>
+        <div class="form-group flex1"><label>الحد الأقصى (ثانية)</label><input type="number" id="maxDelay" value="0.75" min="0.25" max="3600" step="0.05"/></div>
+      </div>
+      <div id="delayRange" class="hint-box">وضع Turbo الافتراضي: 0.35 – 0.75 ثانية</div>
+    </div>
+    <div class="card">
+      <div class="card-title">الأداء والتنويع</div>
+      <div class="settings-list">
+        <div class="settings-item">
+          <div><div class="settings-label">كتابة بشرية</div><div class="settings-desc">محاكاة سرعة الكتابة</div></div>
+          <label class="toggle"><input type="checkbox" id="humanTyping" checked/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="settings-item">
+          <div><div class="settings-label">تنويع الكلمات لكل مجموعة</div><div class="settings-desc">كل مجموعة تحصل على نسخة بصياغة مختلفة تلقائياً</div></div>
+          <label class="toggle"><input type="checkbox" id="uniqueSpintax" checked/><span class="toggle-slider"></span></label>
+        </div>
+        <div class="settings-item">
+          <div><div class="settings-label">إغلاق التبويب تلقائياً</div><div class="settings-desc">إغلاق التبويب بعد النشر</div></div>
+          <label class="toggle"><input type="checkbox" id="autoCloseTabs" checked/><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🤖 إعدادات الذكاء الاصطناعي (Gemini / HuggingFace)</div>
+      <div class="hint-box" style="margin-bottom:10px;background:rgba(78,203,141,0.08);border-color:rgba(78,203,141,0.3);color:var(--success)">
+        <strong>🆓 مجاني 100%:</strong><br>
+        1️⃣ افتح <strong>console.groq.com</strong><br>
+        2️⃣ سجّل بـ Google أو GitHub<br>
+        3️⃣ API Keys → Create API Key<br>
+        4️⃣ انسخ المفتاح (يبدأ بـ gsk_)
+      </div>
+      <div class="form-group">
+        <label>🔑 مفتاح API</label>
+        <label>المزوّد</label>
+        <select id="aiProvider" style="width:100%;margin-bottom:10px;padding:10px;border-radius:10px;">
+          <option value="gemini">Google Gemini 1.5 Flash (موصى به)</option>
+          <option value="huggingface">HuggingFace Inference (بديل مجاني)</option>
+        </select>
+        <input type="password" id="apiKey" autocomplete="off" placeholder="AIzaSy... أو hf_..."/>
+        <small class="muted" style="font-size:11px;margin-top:4px;display:block">14,400 طلب/يوم — يشتغل من مصر ✅</small>
+      </div>
+      <div class="form-row">
+        <button class="btn btn-outline flex1" id="saveAiConfig">💾 حفظ</button>
+        <button class="btn btn-success flex1" id="testApiKey">🔬 اختبار</button>
+      </div>
+      <a href="https://console.groq.com" target="_blank" rel="noopener" class="external-link">🚀 افتح console.groq.com</a>
+      <div id="keyTestResult" style="display:none;margin-top:8px;padding:10px;border-radius:8px;font-size:12px;line-height:1.7;white-space:pre-wrap;word-break:break-word"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">البيانات</div>
+      <div class="btn-row">
+        <button class="btn btn-outline flex1" id="exportData">تصدير الإعدادات</button>
+        <button class="btn btn-danger flex1" id="clearData">مسح كل البيانات</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ LOG TAB ══════════════════════════════════════════════════ -->
+  <div id="tab-log" class="tab-content">
+    <div class="workspace-hero">
+      <div>
+        <div class="workspace-eyebrow">Live Tracking</div>
+        <h3>متابعة النشر لحظة بلحظة</h3>
+        <p>راقب النجاح والفشل والجروبات التي تحتاج مراجعة.</p>
+      </div>
+      <div class="workspace-pill">سجل مباشر</div>
+    </div>
+    <div class="log-header">
+      <div class="log-stats">
+        <span class="stat-success">✓ <strong id="successCount">0</strong></span>
+        <span class="stat-pending">⏳ <strong id="pendingCount">0</strong></span>
+        <span class="stat-fail">✗ <strong id="failCount">0</strong></span>
+        <span class="stat-total">إجمالي: <strong id="totalCount">0</strong></span>
+      </div>
+      <button class="btn btn-outline small" id="clearLog">مسح</button>
+    </div>
+    <div id="postLog" class="post-log">
+      <div class="empty-state">لا توجد منشورات بعد.</div>
+    </div>
+  </div>
+
+  <!-- ══ PLANS TAB ═══════════════════════════════════════════════ -->
+  <div id="tab-plans" class="tab-content plans-tab">
+
+    <!-- Header -->
+    <div class="workspace-hero">
+      <div>
+        <div class="workspace-eyebrow">الاشتراكات</div>
+        <h3>خطط الاشتراك والتفعيل</h3>
+        <p>اختر خطتك وفعّل حسابك لتستمتع بكامل قوة FB Publisher X.</p>
+      </div>
+      <div class="workspace-pill">شهري → ربعي → سنوي</div>
+    </div>
+
+    <!-- Plan Switcher Badge -->
+    <div class="plans-switcher">
+      <span class="plans-switcher-label">💎 وفّر أكثر باشتراك أطول</span>
+    </div>
+
+    <!-- Plans Grid -->
+    <div class="plans-grid">
+
+      <!-- Plan 1: Monthly -->
+      <div class="plan-card plan-monthly">
+        <div class="plan-card-header">
+          <div class="plan-icon">📅</div>
+          <div class="plan-info">
+            <div class="plan-name">الخطة الشهرية</div>
+            <div class="plan-name-en">Monthly Plan</div>
+          </div>
+        </div>
+        <div class="plan-price-row">
+          <span class="plan-price">99</span>
+          <span class="plan-currency">جنيه</span><span class="plan-usd"> (~$4)</span>
+          <span class="plan-period">/ شهر</span>
+        </div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span> اكتشاف الجروبات المتقدم</li>
+          <li><span class="pf-check">✓</span> جدولة الحملات التلقائية</li>
+          <li><span class="pf-check">✓</span> سكرابر التعليقات والرسائل</li>
+          <li><span class="pf-check">✓</span> النشر في الخلفية المستمر</li>
+          <li><span class="pf-check">✓</span> تحليلات مباشرة Live Analytics</li>
+          <li><span class="pf-check">✓</span> تصدير CSV / JSON</li>
+        </ul>
+        <button class="plan-cta plan-cta-basic" type="button" data-pay-plan="الخطة الشهرية" data-pay-price="99">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          اشترك الآن
+        </button>
+      </div>
+
+      <!-- Plan 2: Quarterly — MOST POPULAR -->
+      <div class="plan-card plan-quarterly plan-popular">
+        <div class="plan-popular-badge">🔥 الأكثر طلباً</div>
+        <div class="plan-card-header">
+          <div class="plan-icon">📦</div>
+          <div class="plan-info">
+            <div class="plan-name">الخطة الربع سنوية</div>
+            <div class="plan-name-en">Quarterly — 3 Months</div>
+          </div>
+        </div>
+        <div class="plan-price-row">
+          <span class="plan-price">499</span>
+          <span class="plan-currency">جنيه</span><span class="plan-usd"> (~$10)</span>
+          <span class="plan-period">/ 3 شهور</span>
+        </div>
+        <div class="plan-savings">وفّر ~20% مقارنةً بالشهري</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span> جميع ميزات الخطة الشهرية</li>
+          <li><span class="pf-check pf-gold">⭐</span> دعم أولوية Priority Support</li>
+          <li><span class="pf-check pf-gold">⭐</span> نصائح الأمان متعدد الحسابات</li>
+          <li><span class="pf-check">✓</span> جدولة الحملات التلقائية</li>
+          <li><span class="pf-check">✓</span> تحليلات مباشرة + تصدير</li>
+        </ul>
+        <button class="plan-cta plan-cta-popular" type="button" data-pay-plan="الخطة الربع سنوية" data-pay-price="499">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          اشترك الآن
+        </button>
+      </div>
+
+      <!-- Plan 3: Semi-Annual -->
+      <div class="plan-card plan-semiannual">
+        <div class="plan-value-badge">💎 أفضل قيمة للوكالات</div>
+        <div class="plan-card-header">
+          <div class="plan-icon">🚀</div>
+          <div class="plan-info">
+            <div class="plan-name">الخطة النصف سنوية</div>
+            <div class="plan-name-en">Semi-Annual — 6 Months</div>
+          </div>
+        </div>
+        <div class="plan-price-row">
+          <span class="plan-price">899</span>
+          <span class="plan-currency">جنيه</span><span class="plan-usd"> (~$18)</span>
+          <span class="plan-period">/ 6 شهور</span>
+        </div>
+        <div class="plan-savings plan-savings-teal">وفّر ~200 جنيه · توفير 55%</div>
+        <ul class="plan-features">
+          <li><span class="pf-check">✓</span> جميع ميزات الخطة الربعية</li>
+          <li><span class="pf-check pf-teal">🛡️</span> إعدادات محرك Anti-detection Premium</li>
+          <li><span class="pf-check pf-teal">🛡️</span> بروفايلات أمان متقدمة للحسابات</li>
+          <li><span class="pf-check">✓</span> وضع التخفي Stealth المتطور</li>
+          <li><span class="pf-check">✓</span> دعم أولوية 24/7</li>
+        </ul>
+        <button class="plan-cta plan-cta-semi" type="button" data-pay-plan="الخطة النصف سنوية" data-pay-price="899">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          اشترك الآن
+        </button>
+      </div>
+
+      <!-- Plan 4: Annual — BEST DEAL -->
+      <div class="plan-card plan-annual">
+        <div class="plan-annual-badge">👑 توفير أقصى — للوكالات</div>
+        <div class="plan-card-header">
+          <div class="plan-icon">🏆</div>
+          <div class="plan-info">
+            <div class="plan-name">الخطة السنوية</div>
+            <div class="plan-name-en">Annual — 12 Months</div>
+          </div>
+        </div>
+        <div class="plan-price-row">
+          <span class="plan-price">1,499</span>
+          <span class="plan-currency">جنيه</span><span class="plan-usd"> (~$30)</span>
+          <span class="plan-period">/ سنة</span>
+        </div>
+        <div class="plan-savings plan-savings-gold">وفّر ~890 جنيه · توفير 37%</div>
+        <ul class="plan-features">
+          <li><span class="pf-check pf-gold">👑</span> جميع ميزات الخطط السابقة</li>
+          <li><span class="pf-check pf-gold">👑</span> دعم VIP 1-على-1 وإعداد شخصي</li>
+          <li><span class="pf-check pf-gold">👑</span> وصول مبكر للميزات الجديدة</li>
+          <li><span class="pf-check pf-gold">👑</span> حسابات فيسبوك غير محدودة</li>
+          <li><span class="pf-check pf-gold">👑</span> محرك Stealth VIP متميز</li>
+        </ul>
+        <button class="plan-cta plan-cta-annual" type="button" data-pay-plan="الخطة السنوية" data-pay-price="1499">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          اشترك الآن
+        </button>
+      </div>
+
+    </div><!-- /plans-grid -->
+
+    <!-- Payment Methods -->
+    <div class="payment-methods">
+      <div class="payment-title">💳 طرق الدفع المتاحة</div>
+      <div class="payment-options">
+        <div class="pay-opt pay-vodafone">
+          <div class="pay-icon">📱</div>
+          <div class="pay-name">فودافون كاش</div>
+          <div class="pay-num">01080236940</div>
+        </div>
+        <div class="pay-opt pay-fawry">
+          <div class="pay-icon">🏪</div>
+          <div class="pay-name">فوري</div>
+          <div class="pay-num">متاح قريباً</div>
+        </div>
+        <div class="pay-opt pay-card">
+          <div class="pay-icon">💳</div>
+          <div class="pay-name">بطاقة بنكية</div>
+          <div class="pay-num">تواصل عبر واتساب</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activation Instructions -->
+    <div class="pp-alert">
+      <div class="pp-alert-icon">⚡</div>
+      <div class="pp-alert-body">
+        <div class="pp-alert-title">خطوات التفعيل الفوري</div>
+        <div class="pp-alert-text">
+          حوّل المبلغ المطلوب على رقم فودافون كاش:
+          <span class="pp-cash-num">01080236940</span>
+        </div>
+        <div class="pp-alert-steps">
+          بعد التحويل، اضغط زر واتساب في الخطة المختارة وأرسل: اسكرين شوت التحويل + رقم التحويل + الخطة المطلوبة — التفعيل فوري خلال دقائق.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-plans -->
+
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+  <div class="footer">
+    <div id="progressBar" class="progress-bar" style="display:none">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      <span id="progressText" class="progress-text">0 / 0</span>
+    </div>
+    <div id="statusText" class="status-text">جاهز</div>
+    <div class="power-row">
+      <button id="pauseBtn" class="pause-btn" style="display:none" title="إيقاف مؤقت">
+        <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+        </svg>
+        <span id="pauseLabel">إيقاف</span>
+      </button>
+      <button id="powerBtn" class="power-btn" title="ابدأ النشر المتسلسل بثبات">
+        <svg id="powerIcon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+        </svg>
+        <span id="powerLabel">ابدأ</span>
+      </button>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<!-- ══ MODALS ════════════════════════════════════════════════════ -->
+<div id="spintaxModal" style="display:none" class="modal">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <span>دليل Spintax</span>
+      <button class="icon-btn" id="closeModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <p><code>{مرحبا|أهلاً|هلا}</code> ← يختار واحدة عشوائياً</p>
+      <p>مركّب: <code>{صباح|مساء} {الخير|النور}!</code></p>
+      <p>كل جروب يحصل على نسخة مختلفة عند تفعيل "تنويع الكلمات".</p>
+      <p>اضغط <strong>🎲 عشوائي</strong> لمعاينة نسخة جديدة.</p>
+    </div>
+  </div>
+</div>
+
+<div id="previewModal" role="dialog" aria-modal="true">
+  <div class="preview-sheet">
+    <div class="preview-handle"></div>
+    <div class="preview-sheet-header">
+      <div class="preview-sheet-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+        معاينة موبايل <span class="pill">محاكاة فيسبوك</span>
+      </div>
+      <button class="icon-btn" id="closePreviewModal">✕</button>
+    </div>
+    <div class="preview-sheet-body">
+      <div class="preview-stats" id="previewStats"></div>
+      <div class="fb-post-mockup">
+        <div class="fb-post-top">
+          <div class="fb-avatar">👤</div>
+          <div class="fb-meta">
+            <span class="fb-name">صفحتك</span>
+            <span class="fb-time">الآن · 🌍</span>
+          </div>
+        </div>
+        <div class="fb-post-body" id="previewBody">—</div>
+        <a class="fb-cta-strip" id="previewCtaStrip" href="#" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+          <span id="previewCtaText">تواصل معنا</span>
+        </a>
+        <div class="fb-post-actions">
+          <div class="fb-action">👍 إعجاب</div>
+          <div class="fb-action">💬 تعليق</div>
+          <div class="fb-action">↗️ مشاركة</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-sheet-footer">
+      <button class="btn btn-outline" id="closePreviewModal2">← رجوع</button>
+      <button class="btn btn-primary" id="previewUsePost">✓ استخدم هذا المنشور</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ USER ANNOUNCEMENT MODAL ═══════════════════════════════════ -->
+<div id="annModal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(2,6,18,0.82);align-items:center;justify-content:center;padding:16px;">
+  <div style="width:100%;max-width:420px;background:linear-gradient(165deg,#121a2e,#0a101c);border:1px solid rgba(96,165,250,0.35);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.55);overflow:hidden;font-family:Cairo,Tahoma,sans-serif;direction:rtl;color:#e8f0ff;">
+    <div style="padding:14px 16px;border-bottom:1px solid rgba(96,165,250,0.2);display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(59,130,246,0.1)">
+      <div>
+        <div id="annModalType" style="font-size:10px;font-weight:800;letter-spacing:1px;color:#60a5fa;text-transform:uppercase">إشعار</div>
+        <div id="annModalTitle" style="font-size:16px;font-weight:900;margin-top:2px">—</div>
+      </div>
+      <button type="button" id="annModalClose" style="width:36px;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#c6d6f0;cursor:pointer;font-size:16px">✕</button>
+    </div>
+    <div id="annModalBody" style="padding:16px;font-size:13px;line-height:1.7;color:#b6c7e2;white-space:pre-wrap;max-height:40vh;overflow:auto"></div>
+    <div style="padding:12px 16px 16px;display:flex;flex-direction:column;gap:8px">
+      <a id="annModalCta" href="#" target="_blank" rel="noopener" style="display:none;text-align:center;padding:12px;border-radius:12px;background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;font-weight:800;text-decoration:none;font-size:14px">فتح الرابط</a>
+      <button type="button" id="annModalAck" style="padding:12px;border-radius:12px;border:1px solid rgba(96,165,250,0.3);background:transparent;color:#e8f0ff;font-weight:800;cursor:pointer;font-size:13px;font-family:inherit">حسناً، فهمت</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="popup.js"></script>
+<script src="auth-gate.js"></script>
+
+
+<!-- ══ VODAFONE CASH / WHATSAPP PAYMENT MODAL ════════════════════════
+     CSP-safe: zero inline scripts, onclick, onmouseover, onfocus.
+     All behaviour in pay-modal.js via event delegation.
+     IDs: pay-modal-overlay, sender-number, plan-amount-readonly
+     ════════════════════════════════════════════════════════════════ -->
+<div id="pay-modal-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(2,1,6,0.90);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:linear-gradient(160deg,rgba(18,12,40,0.99),rgba(10,6,22,0.99));border:1px solid rgba(56,189,248,0.34);border-radius:24px;width:100%;max-width:460px;box-shadow:0 28px 70px rgba(2,1,8,0.75),0 0 0 1px rgba(14,165,233,0.14),inset 0 1px 0 rgba(255,255,255,0.04);overflow:hidden;font-family:'Cairo',Tajawal,Arial,sans-serif;direction:rtl;max-height:92vh;overflow-y:auto;">
+    <!-- Modal header -->
+    <div style="padding:18px 20px 16px;border-bottom:1px solid rgba(56,189,248,0.18);background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(45,212,191,0.08));display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div>
+        <div style="font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#3b82f6;margin-bottom:4px;">💳 تأكيد الاشتراك</div>
+        <div style="font-size:17px;font-weight:800;color:#f6fbff;" id="pay-modal-plan-name">—</div>
+      </div>
+      <button id="pay-modal-close-btn" data-pay-close="true" type="button" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#9ec6dc;font-size:18px;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;">✕</button>
+    </div>
+    <!-- Modal body -->
+    <div style="padding:20px;">
+      <!-- Step 1 — Vodafone Cash -->
+      <div style="background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.28);border-radius:16px;padding:16px;margin-bottom:16px;text-align:center;">
+        <div style="font-size:11px;font-weight:700;color:#fca5a5;letter-spacing:0.8px;margin-bottom:10px;">📱 الخطوة ١ — حوّل المبلغ على فودافون كاش</div>
+        <div id="vf-cash-num" style="font-size:26px;font-weight:900;color:#fff;letter-spacing:3px;font-family:'Courier New',monospace;cursor:pointer;padding:8px 16px;border-radius:10px;display:inline-block;transition:background 0.2s;user-select:all;" title="انقر مرتين لنسخ الرقم">01080236940</div>
+        <div style="font-size:10px;color:#9ca3af;margin-top:6px;">انقر مرتين على الرقم لنسخه تلقائياً 📋</div>
+      </div>
+      <!-- Plan amount readonly -->
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:12px;color:#9ec6dc;font-weight:700;margin-bottom:7px;">💰 قيمة الخطة المختارة</label>
+        <input id="plan-amount-readonly" type="text" readonly style="width:100%;padding:11px 14px;background:rgba(56,189,248,0.09);border:1px solid rgba(56,189,248,0.28);border-radius:12px;color:#d9f3ff;font-size:16px;font-weight:800;text-align:center;font-family:'Courier New',monospace;cursor:default;outline:none;box-sizing:border-box;" />
+      </div>
+      <!-- Sender number -->
+      <div style="margin-bottom:14px;">
+        <label style="display:block;font-size:12px;color:#9ec6dc;font-weight:700;margin-bottom:7px;">📲 الخطوة ٢ — رقم الهاتف الذي حوّلت منه *</label>
+        <input id="sender-number" type="tel" dir="ltr" placeholder="مثال: 01xxxxxxxxx" style="width:100%;padding:11px 14px;background:rgba(8,22,38,0.72);border:1px solid rgba(56,189,248,0.24);border-radius:12px;color:#f6fbff;font-size:15px;font-family:'Courier New',monospace;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box;" />
+      </div>
+      <!-- Screenshot upload -->
+      <div style="margin-bottom:18px;">
+        <label style="display:block;font-size:12px;color:#9ec6dc;font-weight:700;margin-bottom:7px;">🖼️ الخطوة ٣ — اسكرين شوت التحويل (أرسله عبر واتساب)</label>
+        <label id="pay-upload-label" for="pay-screenshot" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:22px;border:2px dashed rgba(56,189,248,0.32);border-radius:16px;background:rgba(56,189,248,0.05);cursor:pointer;transition:border-color 0.2s,background 0.2s;">
+          <span style="font-size:30px;">📎</span>
+          <span style="font-size:12.5px;color:#9ec6dc;text-align:center;font-family:'Cairo',Arial,sans-serif;">اضغط لرفع اسكرين شوت للتحويل</span>
+          <span style="font-size:10px;color:#6b7280;">PNG · JPG · WEBP — أرسله يدوياً عبر واتساب بعد فتح المحادثة</span>
+        </label>
+        <input id="pay-screenshot" type="file" accept="image/*" style="display:none;" />
+      </div>
+      <!-- WhatsApp CTA -->
+              <!-- LemonSqueezy direct checkout -->
+        <a id="pay-ls-btn" href="#" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;justify-content:center;gap:10px;
+                  width:100%;padding:14px;border:none;border-radius:14px;
+                  background:linear-gradient(135deg,#ff6b35,#f7931e);
+                  color:#fff;font-size:14px;font-weight:800;
+                  cursor:pointer;font-family:inherit;text-decoration:none;
+                  box-shadow:0 6px 20px rgba(255,107,53,0.38);
+                  margin-bottom:10px;transition:filter 0.2s,transform 0.15s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          💳 ادفع الآن بكارت — LemonSqueezy
+        </a>
+        <div style="text-align:center;font-size:10px;color:#6878a8;margin-bottom:12px;">
+          ✅ كارت بنكي · Visa · Mastercard · PayPal — دفع آمن ومشفر
+        </div>
+<button id="pay-wa-btn" data-pay-send="true" type="button" style="width:100%;padding:15px;background:linear-gradient(135deg,#16a34a,#22c55e,#4ade80);border:none;border-radius:14px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Cairo',Arial,sans-serif;box-shadow:0 8px 24px rgba(34,197,94,0.40);transition:filter 0.2s,transform 0.15s,box-shadow 0.2s;letter-spacing:0.3px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        إرسال للتفعيل عبر واتساب
+      </button>
+      <div style="text-align:center;margin-top:12px;font-size:11px;color:#6b7280;font-family:'Cairo',Arial,sans-serif;">سيتم فتح محادثة واتساب جاهزة بتفاصيل الاشتراك · التفعيل فوري ⚡</div>
+    </div>
+  </div>
+</div>
+
+<script src="pay-modal.js"></script>
+</body>
+</html>

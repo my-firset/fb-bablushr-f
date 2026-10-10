@@ -1,0 +1,13 @@
+.DS_Store
+*.bak
+*.log
+.env
+*.zip
+website/data/users.json
+website/data/app-config.json
+website/data/payment-requests.json
+website/data/download-tokens.json
+website/data/device-trials.json
+website/data/notifications.json
+website/data/payment-proofs/*
+!website/data/payment-proofs/.htaccess
