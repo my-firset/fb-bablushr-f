@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>لوحة تحكم التحديثات — fb Bablushr F</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#12100e; --s2:#1c1916; --s3:#262220; --s4:#33302c;
+  --b1:rgba(45,212,191,0.10); --b2:rgba(45,212,191,0.22); --b3:rgba(94,214,201,0.40);
+  --t1:#f9f9f9; --t2:#a1a1aa; --t3:#99f6e4; --t4:#5eead4;
+  --p1:#2dd4bf; --p2:#5eead4; --p3:#99f6e4;
+  --pg:linear-gradient(135deg,#115e59 0%,#0f766e 35%,#14b8a6 72%,#2dd4bf 100%);
+  --pglow:rgba(45,212,191,0.36);
+  --ok:#4ade80; --okbg:rgba(74,222,128,0.10); --okb:rgba(74,222,128,0.26);
+  --err:#fb7185; --errbg:rgba(251,113,133,0.10); --errb:rgba(251,113,133,0.28);
+  --warn:#5eead4; --warnbg:rgba(94,214,201,0.10);
+  --gold:#5eead4; --gold2:#99f6e4;
+  --goldg:linear-gradient(135deg,#115e59 0%,#14b8a6 50%,#5eead4 100%);
+  --font:'Cairo',-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100vh;padding:24px 16px;
+  background:radial-gradient(ellipse 60% 36% at 80% 0%,rgba(45,212,191,0.07),transparent),
+             radial-gradient(ellipse 44% 28% at 12% 95%,rgba(20,184,166,0.05),transparent),#12100e;}
+.wrap{max-width:740px;margin:0 auto;}
+
+.page-header{display:flex;align-items:center;gap:14px;background:var(--s2);border:1px solid var(--b2);
+  border-radius:20px;padding:20px 24px;margin-bottom:24px;}
+.page-icon{width:52px;height:52px;border-radius:14px;background:var(--pg);display:flex;align-items:center;
+  justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 6px 20px var(--pglow);}
+.page-title{font-size:20px;font-weight:900;color:var(--t1);}
+.page-sub{font-size:12px;color:var(--t3);margin-top:3px;}
+.page-back{margin-right:auto;font-size:12px;color:var(--p2);text-decoration:none;padding:7px 14px;
+  border:1px solid var(--b2);border-radius:9px;transition:all .2s;}
+.page-back:hover{background:var(--s3);color:var(--p3);}
+
+.card{background:var(--s2);border:1px solid var(--b1);border-radius:18px;padding:22px;margin-bottom:16px;}
+.card-title{font-size:14px;font-weight:800;color:var(--t1);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;
+  background:rgba(45,212,191,0.12);border:1px solid rgba(94,214,201,0.25);color:var(--p3);}
+.badge-live{background:rgba(74,222,128,0.12);border-color:rgba(74,222,128,0.30);color:var(--ok);}
+
+.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.stat-box{background:var(--s3);border:1px solid var(--b1);border-radius:12px;padding:14px;text-align:center;}
+.stat-val{font-size:20px;font-weight:900;color:var(--p2);}
+.stat-lbl{font-size:10px;color:var(--t3);margin-top:4px;}
+
+label{display:block;font-size:12px;font-weight:700;color:var(--t2);margin-bottom:6px;margin-top:14px;}
+label:first-child{margin-top:0;}
+input[type=text],input[type=url]{width:100%;padding:12px 14px;background:var(--s3);
+  border:1.5px solid var(--b2);border-radius:12px;color:var(--t1);font-size:14px;
+  font-family:var(--font);outline:none;transition:border-color .2s,box-shadow .2s;}
+input:focus{border-color:rgba(94,214,201,0.55);box-shadow:0 0 0 3px rgba(45,212,191,0.14);}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:500px){.row2{grid-template-columns:1fr;}.status-grid{grid-template-columns:1fr 1fr;}}
+
+.upload-area{border:2px dashed var(--b2);border-radius:14px;padding:28px 20px;text-align:center;
+  cursor:pointer;transition:all .25s;background:var(--s3);position:relative;margin-top:14px;}
+.upload-area:hover,.upload-area.drag{border-color:var(--p2);background:rgba(45,212,191,0.07);}
+.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-icon{font-size:32px;margin-bottom:8px;}
+.upload-text{font-size:13px;font-weight:700;color:var(--t2);}
+.upload-sub{font-size:11px;color:var(--t3);margin-top:4px;}
+.upload-chosen{font-size:12px;color:var(--ok);margin-top:8px;font-weight:700;display:none;}
+
+.progress-wrap{margin-top:14px;display:none;}
+.progress-bar{height:8px;background:var(--s4);border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--pg);border-radius:99px;width:0%;transition:width .3s;}
+.progress-label{font-size:11px;color:var(--t3);margin-top:6px;text-align:center;}
+
+.btn{padding:13px 20px;border:none;border-radius:12px;font-size:14px;font-weight:800;
+  cursor:pointer;font-family:var(--font);transition:filter .2s,transform .15s;
+  display:inline-flex;align-items:center;gap:8px;}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px);}
+.btn:active{transform:scale(0.97);}
+.btn:disabled{opacity:0.5;cursor:not-allowed;filter:none;transform:none;}
+.btn-primary{background:var(--pg);color:#fff;box-shadow:0 4px 16px var(--pglow);}
+.btn-ghost{background:rgba(45,212,191,0.10);border:1px solid var(--b2);color:var(--p3);}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.btn-full{width:100%;justify-content:center;}
+
+.alert{border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.6;margin-bottom:14px;
+  display:flex;align-items:flex-start;gap:10px;}
+.alert-ok{background:var(--okbg);border:1px solid var(--okb);color:var(--ok);}
+.alert-warn{background:var(--warnbg);border:1px solid rgba(94,214,201,0.28);color:var(--warn);}
+.alert-err{background:var(--errbg);border:1px solid var(--errb);color:var(--err);}
+.alert-info{background:rgba(45,212,191,0.07);border:1px solid var(--b2);color:var(--p3);}
+.alert-body{flex:1;}
+
+.step-list{display:flex;flex-direction:column;gap:12px;}
+.step-item{display:flex;align-items:flex-start;gap:12px;background:var(--s3);
+  border:1px solid var(--b1);border-radius:12px;padding:14px 16px;}
+.step-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:var(--pg);color:#fff;
+  font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 10px var(--pglow);margin-top:1px;}
+.step-title{font-size:13px;font-weight:800;color:var(--t1);margin-bottom:3px;}
+.step-desc{font-size:12px;color:var(--t2);line-height:1.55;}
+.step-desc code{background:rgba(45,212,191,0.12);border:1px solid rgba(94,214,201,0.20);
+  color:var(--p3);border-radius:5px;padding:1px 6px;font-size:11px;}
+
+.log-entry{display:flex;align-items:flex-start;gap:10px;background:var(--s3);
+  border:1px solid var(--b1);border-radius:10px;padding:12px 14px;}
+.log-ver{background:var(--pg);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;
+  border-radius:20px;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px var(--pglow);}
+.log-notes{font-size:12px;color:var(--t2);flex:1;}
+.log-date{font-size:10px;color:var(--t3);white-space:nowrap;flex-shrink:0;}
+
+.check-item{display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 12px;
+  background:var(--s3);border:1px solid var(--b1);border-radius:10px;transition:border-color .2s;}
+.check-item.done{border-color:rgba(74,222,128,0.25);}
+.check-item input{width:16px;height:16px;accent-color:var(--ok);cursor:pointer;flex-shrink:0;}
+.check-lbl{font-size:13px;color:var(--t2);transition:color .2s;}
+.check-item.done .check-lbl{color:var(--ok);text-decoration:line-through;}
+
+hr{border:none;border-top:1px solid var(--b1);margin:18px 0;}
+
+#toast{position:fixed;bottom:24px;right:24px;background:var(--s2);border:1px solid var(--ok);
+  color:var(--ok);font-size:13px;font-weight:700;padding:12px 18px;border-radius:12px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.5);transform:translateY(20px);opacity:0;
+  transition:all .3s;pointer-events:none;font-family:var(--font);z-index:9999;}
+#toast.show{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="page-icon">🚀</div>
+    <div>
+      <div class="page-title">لوحة إدارة التحديثات</div>
+      <div class="page-sub">fb Bablushr F — نشر تحديثات الإضافة تلقائياً على كل المستخدمين</div>
+    </div>
+    <a href="/admin/index.php" class="page-back">← لوحة الأدمن</a>
+  </div>
+
+  <!-- Current Status -->
+  <div class="card">
+    <div class="card-title">📊 الحالة الحالية <span class="badge badge-live">مباشر</span></div>
+    <div class="status-grid">
+      <div class="stat-box">
+        <div class="stat-val" id="curVersion">…</div>
+        <div class="stat-lbl">الإصدار المنشور</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color:var(--ok);" id="updateStatus">…</div>
+        <div class="stat-lbl">حالة التحديث</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color:var(--warn);font-size:13px;" id="lastUpdate">…</div>
+        <div class="stat-lbl">آخر تحديث</div>
+      </div>
+    </div>
+    <div class="alert alert-ok">
+      ✅ كروم وكيوي يفحصون <strong>updates.xml</strong> كل 5 ساعات — المستخدمون يتحدثون تلقائياً بدون أي تدخل
+    </div>
+  </div>
+
+  <!-- Download Counter -->
+  <div class="card" id="dlCard">
+    <div class="card-title">⬇️ إحصائيات التحميل <span class="badge" id="dlLastAt">جاري التحميل…</span></div>
+    <div class="status-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat-box" style="border-color:rgba(45,212,191,0.25);">
+        <div class="stat-val" style="color:var(--p2);font-size:26px;" id="dlTotal">—</div>
+        <div class="stat-lbl">إجمالي التحميلات</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color:var(--ok);" id="dlToday">—</div>
+        <div class="stat-lbl">اليوم</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color:var(--warn);" id="dlMonth">—</div>
+        <div class="stat-lbl">هذا الشهر</div>
+      </div>
+    </div>
+    <!-- Mini bar chart for last 7 days -->
+    <div style="margin-top:14px;">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-weight:700;">آخر 7 أيام</div>
+      <div id="dlChart" style="display:flex;align-items:flex-end;gap:6px;height:52px;"></div>
+    </div>
+  </div>
+
+  <!-- NEW RELEASE -->
+  <div class="card">
+    <div class="card-title">🚀 نشر إصدار جديد <span class="badge">يحدّث السيرفر مباشرة</span></div>
+    <div class="alert alert-info">
+      📌 أدخل رقم الإصدار + ارفع ZIP الجديد ← اضغط "نشر" — سيتم تحديث <strong>updates.xml</strong> على السيرفر فوراً وتتحدث الإضافة عند كل المستخدمين خلال 5 ساعات
+    </div>
+
+    <div class="row2">
+      <div>
+        <label>رقم الإصدار الجديد ✱</label>
+        <input type="text" id="newVersion" placeholder="مثال: 17.0.0" autocomplete="off"/>
+      </div>
+      <div>
+        <label>اسم ملف ZIP ✱</label>
+        <input type="text" id="newFilename" placeholder="fb-bablushr-f-v17-extension.zip" autocomplete="off"/>
+      </div>
+    </div>
+
+    <label>ملاحظات الإصدار (اختياري)</label>
+    <input type="text" id="newNotes" placeholder="مثال: تحسين سرعة النشر + إصلاح تسجيل الدخول"/>
+
+    <!-- Upload area -->
+    <div class="upload-area" id="uploadArea">
+      <input type="file" id="zipFileInput" accept=".zip" onchange="onFileChosen(this)"/>
+      <div class="upload-icon">📦</div>
+      <div class="upload-text">اسحب ملف ZIP هنا أو اضغط للاختيار</div>
+      <div class="upload-sub">سيتم رفعه تلقائياً إلى جذر الموقع</div>
+      <div class="upload-chosen" id="chosenName"></div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">جاري الإرسال…</div>
+    </div>
+
+    <!-- Result -->
+    <div id="publishResult" style="display:none;margin-top:14px;"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary btn-full" id="publishBtn" onclick="publishRelease()">
+        ⚡ نشر التحديث الآن — تحديث فوري لكل المستخدمين
+      </button>
+    </div>
+    <div style="font-size:11px;color:var(--t3);margin-top:8px;text-align:center;">
+      يتصل بـ <code style="color:var(--p3)">/api/set-version.php</code> ويحدّث <code style="color:var(--p3)">updates.xml</code> على السيرفر مباشرة
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="card">
+    <div class="card-title">📋 كيف تنشر تحديثاً جديداً</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">١</div>
+        <div class="step-body">
+          <div class="step-title">اطلب من كلود تحديث الإضافة</div>
+          <div class="step-desc">أرسل طلبك لكلود: "حدّث الإضافة وأضف ميزة كذا" — سيرسل لك ملف ZIP جديد</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">٢</div>
+        <div class="step-body">
+          <div class="step-title">افتح هذه الصفحة وأدخل بيانات الإصدار</div>
+          <div class="step-desc">أدخل رقم الإصدار الجديد + ارفع الـ ZIP من هنا — رقم الإصدار يُملأ تلقائياً من اسم الملف</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">٣</div>
+        <div class="step-body">
+          <div class="step-title">اضغط "نشر التحديث"</div>
+          <div class="step-desc">
+            يرفع الـ ZIP على الموقع ويعدّل <code>updates.xml</code> تلقائياً — لا تحتاج لأي خطوة يدوية إضافية
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">٤</div>
+        <div class="step-body">
+          <div class="step-title">✅ كل المستخدمين يتحدثون تلقائياً</div>
+          <div class="step-desc">
+            كروم وكيوي يفحصون <code>updates.xml</code> كل <strong>5 ساعات</strong> — إذا وجدوا إصداراً أعلى يحمّلونه ويثبّتونه بدون أي تدخل من المستخدم
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELEASE LOG -->
+  <div class="card">
+    <div class="card-title">📜 سجل الإصدارات</div>
+    <div id="versionLog" style="display:flex;flex-direction:column;gap:8px;">
+      <div style="color:var(--t3);font-size:12px;text-align:center;padding:14px;">جاري التحميل…</div>
+    </div>
+    <hr/>
+    <div class="row2" style="margin-top:0;">
+      <div>
+        <label>رقم الإصدار</label>
+        <input type="text" id="logVersion" placeholder="16.3.0"/>
+      </div>
+      <div>
+        <label>ملاحظات</label>
+        <input type="text" id="logNotes" placeholder="تحسين كذا، إصلاح كذا…"/>
+      </div>
+    </div>
+    <button class="btn btn-ghost" style="margin-top:12px;" onclick="addLocalLog()">+ إضافة ملاحظة للسجل</button>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="card">
+    <div class="card-title">✅ قائمة التحقق قبل النشر</div>
+    <div id="checklist" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+
+  <!-- IMPORTANT INFO -->
+  <div class="card">
+    <div class="card-title">ℹ️ معلومات مهمة</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">⏱</div>
+        <div class="step-body">
+          <div class="step-title">وقت التحديث التلقائي</div>
+          <div class="step-desc">
+            كروم وكيوي يفحصون كل 5 ساعات تلقائياً.<br/>
+            للتحديث الفوري: <code>chrome://extensions</code> ← فعّل Developer Mode ← اضغط "Update"
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">🔢</div>
+        <div class="step-body">
+          <div class="step-title">قاعدة رقم الإصدار</div>
+          <div class="step-desc">
+            الرقم الجديد يجب أن يكون دائماً <strong>أكبر</strong> من القديم.<br/>
+            صيغة: <code>MAJOR.MINOR.PATCH</code> — مثال: <code>16.2.1 → 16.3.0 → 17.0.0</code>
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">🔐</div>
+        <div class="step-body">
+          <div class="step-title">App ID الإضافة (لا تغيّره)</div>
+          <div class="step-desc">
+            <code>dmcbokioicahkkemfjo</code> — معرّف الإضافة الثابت في كروم وكيوي — موجود في <code>updates.xml</code>
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">🔒</div>
+        <div class="step-body">
+          <div class="step-title">هذه الصفحة محمية بتسجيل دخول الأدمن</div>
+          <div class="step-desc">
+            زر النشر يتصل بـ <code>/api/set-version.php</code> الذي يتحقق من جلسة الأدمن قبل أي تعديل
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY -->
+  <div class="card">
+    <div class="card-title">⚡ إجراءات الطوارئ للمستخدمين</div>
+    <div class="alert alert-warn" style="margin-bottom:14px;">
+      للمستخدمين الذين لا تتحدث إضافتهم تلقائياً خلال 5 ساعات
+    </div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">💻</div>
+        <div class="step-body">
+          <div class="step-title">Chrome Desktop — تحديث فوري</div>
+          <div class="step-desc"><code>chrome://extensions</code> ← فعّل Developer Mode ← اضغط زر "Update" في الأعلى</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">📱</div>
+        <div class="step-body">
+          <div class="step-title">Kiwi Browser Android — تحديث فوري</div>
+          <div class="step-desc"><code>kiwi://extensions</code> ← تأكد Developer Mode مفعّل ← اضغط "Update"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div id="toast">✅</div>
+
+<script>
+var API_URL = '/api/set-version.php';
+
+document.addEventListener('DOMContentLoaded', function(){
+  loadCurrentStatus();
+  renderVersionLog();
+  renderChecklist();
+  loadDlStats();
+
+  var area = document.getElementById('uploadArea');
+  area.addEventListener('dragover', function(e){ e.preventDefault(); area.classList.add('drag'); });
+  area.addEventListener('dragleave', function(){ area.classList.remove('drag'); });
+  area.addEventListener('drop', function(e){
+    e.preventDefault(); area.classList.remove('drag');
+    var f = e.dataTransfer.files[0];
+    if(f){
+      var dt = new DataTransfer();
+      dt.items.add(f);
+      document.getElementById('zipFileInput').files = dt.files;
+      onFileChosen(null, f);
+    }
+  });
+});
+
+function loadCurrentStatus(){
+  fetch('/updates.xml?_=' + Date.now())
+    .then(function(r){ return r.text(); })
+    .then(function(xml){
+      var ver  = xml.match(/version='([^']+)'/);
+      var file = xml.match(/codebase='[^']*\/([^']+\.zip)'/);
+      document.getElementById('curVersion').textContent  = ver  ? ver[1]  : '—';
+      document.getElementById('updateStatus').textContent = 'نشط ✓';
+      document.getElementById('lastUpdate').textContent   = '—';
+      if(file && !document.getElementById('newFilename').value){
+        document.getElementById('newFilename').value = file[1];
+      }
+    })
+    .catch(function(){
+      document.getElementById('curVersion').textContent   = '—';
+      document.getElementById('updateStatus').textContent = 'خطأ ⚠';
+      document.getElementById('updateStatus').style.color = 'var(--warn)';
+      document.getElementById('lastUpdate').textContent   = '—';
+    });
+}
+
+function onFileChosen(input, file){
+  var f = file || (input && input.files[0]);
+  if(!f) return;
+  var cn = document.getElementById('chosenName');
+  cn.textContent = '📦 ' + f.name + '  (' + (f.size/1024/1024).toFixed(1) + ' MB)';
+  cn.style.display = 'block';
+  document.getElementById('newFilename').value = f.name;
+  var m = f.name.match(/v(\d+\.\d+\.\d+)/i);
+  if(m && !document.getElementById('newVersion').value){
+    document.getElementById('newVersion').value = m[1];
+  }
+}
+
+function publishRelease(){
+  var version   = document.getElementById('newVersion').value.trim();
+  var filename  = document.getElementById('newFilename').value.trim();
+  var notes     = document.getElementById('newNotes').value.trim();
+  var fileInput = document.getElementById('zipFileInput');
+
+  if(!version){  showToast('⚠️ أدخل رقم الإصدار الجديد', 'warn'); return; }
+  if(!filename){ showToast('⚠️ أدخل اسم ملف ZIP', 'warn'); return; }
+  if(!/^\d+\.\d+\.\d+$/.test(version)){
+    showToast('⚠️ صيغة الإصدار: مثل 17.0.0', 'warn'); return;
+  }
+
+  var btn = document.getElementById('publishBtn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ جاري النشر…';
+
+  var fd = new FormData();
+  fd.append('version',  version);
+  fd.append('filename', filename);
+  fd.append('notes',    notes);
+  if(fileInput.files[0]) fd.append('zipfile', fileInput.files[0]);
+
+  var pw = document.getElementById('progressWrap');
+  var pf = document.getElementById('progressFill');
+  var pl = document.getElementById('progressLabel');
+  pw.style.display = 'block';
+  pf.style.width = '5%';
+  pl.textContent = 'جاري الإرسال…';
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', API_URL);
+
+  xhr.upload.onprogress = function(e){
+    if(e.lengthComputable){
+      var pct = Math.min(90, Math.round(e.loaded / e.total * 90));
+      pf.style.width = pct + '%';
+      pl.textContent = 'رفع الملف… ' + pct + '%';
+    }
+  };
+
+  xhr.onload = function(){
+    pf.style.width = '100%';
+    var res;
+    try { res = JSON.parse(xhr.responseText); }
+    catch(e){ res = {ok:false, message:'استجابة غير متوقعة من السيرفر'}; }
+
+    var rd = document.getElementById('publishResult');
+    rd.style.display = 'block';
+
+    if(res.ok){
+      pl.textContent = 'اكتمل ✓';
+      rd.innerHTML =
+        '<div class="alert alert-ok">' +
+          '<span style="font-size:22px;">🎉</span>' +
+          '<div class="alert-body">' +
+            '<strong>تم النشر بنجاح!</strong><br/>' +
+            '• الإصدار الجديد: <strong>v' + esc(res.version) + '</strong><br/>' +
+            '• الملف: <code style="color:var(--ok)">' + esc(res.filename) + '</code><br/>' +
+            (res.zip_uploaded ? '• تم رفع الـ ZIP على الموقع ✓<br/>' : '') +
+            '• <a href="/updates.xml" target="_blank" style="color:var(--ok)">فتح /updates.xml ←</a>' +
+          '</div>' +
+        '</div>';
+
+      document.getElementById('curVersion').textContent  = res.version;
+      document.getElementById('updateStatus').textContent = 'نشط ✓';
+      document.getElementById('lastUpdate').textContent   = new Date().toLocaleDateString('ar-EG');
+      addToLog(res.version, notes || 'تحديث جديد');
+      renderVersionLog();
+      showToast('🎉 تم نشر v' + res.version + ' بنجاح!');
+    } else {
+      pl.textContent = 'فشل ✗';
+      rd.innerHTML = '<div class="alert alert-err">⚠️ ' + esc(res.message || 'حدث خطأ') + '</div>';
+      showToast('❌ ' + (res.message || 'فشل النشر'), 'err');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '⚡ نشر التحديث الآن — تحديث فوري لكل المستخدمين';
+  };
+
+  xhr.onerror = function(){
+    pf.style.width = '0%';
+    pl.textContent = 'فشل الاتصال';
+    var rd = document.getElementById('publishResult');
+    rd.style.display = 'block';
+    rd.innerHTML = '<div class="alert alert-err">❌ تعذّر الاتصال — تأكد أنك مسجّل دخول في لوحة الأدمن أولاً</div>';
+    btn.disabled = false;
+    btn.innerHTML = '⚡ نشر التحديث الآن — تحديث فوري لكل المستخدمين';
+    showToast('❌ فشل الاتصال بالسيرفر', 'err');
+  };
+
+  xhr.send(fd);
+}
+
+/* ── Version Log ─────────────────────────── */
+function getLog(){ return JSON.parse(localStorage.getItem('fbbf_releaseLog') || '[]'); }
+function saveLog(l){ localStorage.setItem('fbbf_releaseLog', JSON.stringify(l)); }
+function addToLog(version, notes){
+  var l = getLog();
+  l.push({ver:version, notes:notes, date:new Date().toLocaleDateString('ar-EG')});
+  saveLog(l);
+}
+function renderVersionLog(){
+  var l = getLog();
+  if(!l.length){
+    l = [{ver:'16.2.1', notes:'الإصدار الأول بنظام التحديث التلقائي', date:new Date().toLocaleDateString('ar-EG')}];
+    saveLog(l);
+  }
+  document.getElementById('versionLog').innerHTML = l.slice().reverse().map(function(e){
+    return '<div class="log-entry"><span class="log-ver">v' + esc(e.ver) + '</span>' +
+      '<span class="log-notes">' + esc(e.notes) + '</span>' +
+      '<span class="log-date">' + esc(e.date) + '</span></div>';
+  }).join('');
+}
+function addLocalLog(){
+  var v = document.getElementById('logVersion').value.trim();
+  var n = document.getElementById('logNotes').value.trim();
+  if(!v || !n){ showToast('⚠️ أدخل الإصدار والملاحظات', 'warn'); return; }
+  addToLog(v, n);
+  document.getElementById('logVersion').value = '';
+  document.getElementById('logNotes').value   = '';
+  renderVersionLog();
+  showToast('✅ تمت الإضافة للسجل');
+}
+
+/* ── Checklist ───────────────────────────── */
+var CHECKS = [
+  'لدي ملف ZIP الجديد جاهز',
+  'رقم الإصدار الجديد أكبر من القديم',
+  'رفعت الملف من هذه الصفحة وضغطت "نشر"',
+  'ظهرت رسالة "تم النشر بنجاح"',
+  'فتحت /updates.xml وتحققت من صحة الإصدار',
+];
+function renderChecklist(){
+  var c = JSON.parse(localStorage.getItem('fbbf_checks') || '{}');
+  document.getElementById('checklist').innerHTML = CHECKS.map(function(txt, i){
+    var done = !!c[i];
+    return '<label class="check-item' + (done?' done':'') + '">' +
+      '<input type="checkbox"' + (done?' checked':'') + ' onchange="toggleCheck(' + i + ',this.checked)"/>' +
+      '<span class="check-lbl">' + txt + '</span></label>';
+  }).join('');
+}
+function toggleCheck(i, val){
+  var c = JSON.parse(localStorage.getItem('fbbf_checks') || '{}');
+  c[i] = val; localStorage.setItem('fbbf_checks', JSON.stringify(c));
+  renderChecklist();
+  if(CHECKS.filter(function(_,j){ return c[j]; }).length === CHECKS.length)
+    showToast('🎉 كل النقاط مكتملة — جاهز للنشر!');
+}
+
+/* ── Download Stats ──────────────────────── */
+function loadDlStats(){
+  var x = new XMLHttpRequest();
+  x.open('GET', '/api/stats.php', true);
+  x.onload = function(){
+    if(x.status !== 200) return;
+    try {
+      var d = JSON.parse(x.responseText);
+      if(!d.ok) return;
+      document.getElementById('dlTotal').textContent = d.total.toLocaleString('ar-EG');
+      document.getElementById('dlToday').textContent = d.today.toLocaleString('ar-EG');
+      document.getElementById('dlMonth').textContent = d.this_month.toLocaleString('ar-EG');
+      if(d.last_at){
+        var dt = new Date(d.last_at);
+        document.getElementById('dlLastAt').textContent = 'آخر تحميل: ' + dt.toLocaleDateString('ar-EG');
+      } else {
+        document.getElementById('dlLastAt').textContent = 'لا تحميلات بعد';
+      }
+      if(d.last7 && d.last7.length){
+        var max = Math.max.apply(null, d.last7.map(function(r){ return r.count; })) || 1;
+        document.getElementById('dlChart').innerHTML = d.last7.map(function(r){
+          var pct = Math.round((r.count / max) * 100);
+          var isToday = r.date === new Date().toISOString().slice(0,10);
+          return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;">' +
+            '<span style="font-size:9px;color:var(--t3);">' + (r.count||'') + '</span>' +
+            '<div style="width:100%;background:' + (isToday?'var(--p1)':'rgba(45,212,191,0.35)') +
+            ';border-radius:4px 4px 0 0;height:' + Math.max(pct,4) + '%;min-height:4px;' +
+            'transition:height .4s;"></div>' +
+            '<span style="font-size:8px;color:var(--t3);">' + r.date.slice(5) + '</span>' +
+            '</div>';
+        }).join('');
+      }
+    } catch(e){}
+  };
+  x.send();
+}
+
+/* ── Helpers ─────────────────────────────── */
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function showToast(msg, type){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.borderColor = type==='err' ? 'var(--err)' : type==='warn' ? 'var(--warn)' : 'var(--ok)';
+  t.style.color       = type==='err' ? 'var(--err)' : type==='warn' ? 'var(--warn)' : 'var(--ok)';
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(function(){ t.classList.remove('show'); }, 3500);
+}
+</script>
+</body>
+</html>
